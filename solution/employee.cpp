@@ -26,3 +26,8 @@ void Employee::setScore(int score)
 {
     Employee::score = score;
 }
+
+Employee::Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth) : Citizen(id, name,
+                                                                                                             lastName,
+                                                                                                             yearOfBirth)
+{}

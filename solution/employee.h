@@ -6,6 +6,8 @@
 #define UNTITLED_EMPLOYEE_H
 
 #include <set>
+#include "citizen.h"
+#include "skill.h"
 
 class Employee : private Citizen{
     long salary;
@@ -23,8 +25,8 @@ public:
     Citizen* clone();
 
 private:
-    set<Skill> skills;
+    std::set<Skill> skills;
 public:
-    Employee(long salary, int rank, const set <Skill> &skills);
+    Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
 };
 #endif //UNTITLED_EMPLOYEE_H
