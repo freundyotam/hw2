@@ -2,34 +2,34 @@
 
 #include <iostream>
 
-long Skill::getId() const
+long mtm::Skill::getId() const
 {
     return id;
 }
 
-const std::string &Skill::getName() const
+const std::string &mtm::Skill::getName() const
 {
     return name;
 }
 
-int Skill::getRequiredSkillPoints() const
+int mtm::Skill::getRequiredSkillPoints() const
 {
     return required_skill_points;
 }
 
-bool Skill::operator==(const Skill &rhs) const
+bool mtm::Skill::operator==(const Skill &rhs) const
 {
     return id == rhs.id &&
            name == rhs.name &&
            required_skill_points == rhs.required_skill_points;
 }
 
-bool Skill::operator!=(const Skill &rhs) const
+bool mtm::Skill::operator!=(const Skill &rhs) const
 {
     return !(rhs == *this);
 }
 
-bool Skill::operator<(const Skill &rhs) const
+bool mtm::Skill::operator<(const Skill &rhs) const
 {
     if (id < rhs.id)
         return true;
@@ -42,21 +42,21 @@ bool Skill::operator<(const Skill &rhs) const
     return required_skill_points < rhs.required_skill_points;
 }
 
-bool Skill::operator>(const Skill &rhs) const
+bool mtm::Skill::operator>(const Skill &rhs) const
 {
     return rhs < *this;
 }
 
-bool Skill::operator<=(const Skill &rhs) const
+bool mtm::Skill::operator<=(const Skill &rhs) const
 {
     return !(rhs < *this);
 }
 
-bool Skill::operator>=(const Skill &rhs) const
+bool mtm::Skill::operator>=(const Skill &rhs) const
 {
     return !(*this < rhs);
 }
 
-Skill::Skill(long id, const std::string &name, int requiredSkillPoints) : id(id), name(name),
+mtm::Skill::Skill(long id, const std::string &name, int requiredSkillPoints) : id(id), name(name),
                                                                           required_skill_points(requiredSkillPoints)
 {}

@@ -4,27 +4,27 @@
 
 #include "citizen.h"
 
-long Citizen::getId() const
+long mtm::Citizen::getId() const
 {
     return id;
 }
 
-const std::string &Citizen::getName() const
+const std::string &mtm::Citizen::getName() const
 {
     return name;
 }
 
-const std::string &Citizen::getLastName() const
+const std::string &mtm::Citizen::getLastName() const
 {
     return last_name;
 }
 
-int Citizen::getYearOfBirth() const
+int mtm::Citizen::getYearOfBirth() const
 {
     return year_of_birth;
 }
 
-Citizen::Citizen(long id, const std::string &name, const std::string &lastName, int yearOfBirth) : id(id), name(name),
+mtm::Citizen::Citizen(long id, const std::string &name, const std::string &lastName, int yearOfBirth) : id(id), name(name),
                                                                                                    last_name(lastName),
                                                                                                    year_of_birth(
                                                                                                            yearOfBirth)

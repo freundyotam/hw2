@@ -4,30 +4,26 @@
 
 #include "employee.h"
 
-Employee::Employee(long salary, int rank, const set <Skill> &skills) : salary(salary), rank(rank), skills(skills)
+mtm::Employee::Employee(long salary, int rank, const set <Skill> &skills) : salary(salary), rank(rank), skills(skills)
 {}
 
-long Employee::getSalary() const
+long mtm::Employee::getSalary() const
 {
     return salary;
 }
 
-int Employee::getScore() const
+int mtm::Employee::getScore() const
 {
     return score;
 }
 
-void Employee::setSalary(long salary)
+void mtm::Employee::setSalary(long salary)
 {
     Employee::salary = salary;
 }
 
-void Employee::setScore(int score)
+void mtm::Employee::setScore(int score)
 {
     Employee::score = score;
 }
 
-Employee::Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth) : Citizen(id, name,
-                                                                                                             lastName,
-                                                                                                             yearOfBirth)
-{}
