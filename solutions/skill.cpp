@@ -2,7 +2,17 @@
 
 #include <iostream>
 
-void hello()
+long skill::getId() const
 {
-    std::cout << "Hello, World!" << std::endl;
+    return id;
+}
+
+const std::string &skill::getName() const
+{
+    return name;
+}
+
+int skill::getRequiredSkillPoints() const
+{
+    return required_skill_points;
 }
