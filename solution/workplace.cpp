@@ -55,3 +55,15 @@ void mtm::Workplace::fireManager(long managerId)
     if (managers.erase(managerId) == 0)
         throw; // TODO: ManagerNotHired excception
 }
+
+std::ostream &mtm::operator<<(std::ostream &os, const mtm::Workplace &workplace)
+{
+    os << "Workplace name - " << workplace.getName();
+
+    os << "Group" << std::endl;
+
+    for (const std::pair<long, Manager *> &manager_pair : workplace.managers)
+    {
+        manager_pair.second->printLong(os);
+    }
+}
