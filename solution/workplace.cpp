@@ -32,14 +32,14 @@ template <class Condition>
 void mtm::Workplace::hireEmployee(Condition isHirable, Employee *employee, int managerId)
 {
     if (!isHirable(employee))
-        throw; // TODO: EmployeeNotSelected exception
+        throw std::string("EmployeeNotSelected"); // TODO: EmployeeNotSelected exception
 }
 
 void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 {
     std::map<long, Manager *>::iterator iterator = managers.find(managerId);
     if (iterator == managers.end())
-        throw; // TODO: ManagerIsNotHired exception
+        throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
 
     (iterator->second)->removeEmployee(employeeId);
 }
@@ -47,13 +47,13 @@ void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 void mtm::Workplace::hireManager(Manager *manager)
 {
     if (!managers.insert({manager->getId(), manager}).second)
-        throw; // TODO: ManagerAlreadyHired exception
+        throw std::string("ManagerAlreadyHired"); // TODO: ManagerAlreadyHired exception
 }
 
 void mtm::Workplace::fireManager(long managerId)
 {
     if (managers.erase(managerId) == 0)
-        throw; // TODO: ManagerNotHired excception
+        throw std::string("ManagerNotHired"); // TODO: ManagerNotHired excception
 }
 
 std::ostream &mtm::operator<<(std::ostream &os, const mtm::Workplace &workplace)
