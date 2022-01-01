@@ -60,10 +60,15 @@ std::ostream &mtm::operator<<(std::ostream &os, const mtm::Workplace &workplace)
 {
     os << "Workplace name - " << workplace.getName();
 
-    os << "Group" << std::endl;
+    if (!workplace.managers.empty())
+        os << " Groups:";
+
+    os << std::endl;
 
     for (const std::pair<long, Manager *> &manager_pair : workplace.managers)
     {
         manager_pair.second->printLong(os);
     }
+
+    return os;
 }
