@@ -9,7 +9,7 @@
 #include "employee.h"
 #include <set>
 namespace mtm{
-    class Manager : public mtm::Citizen{
+    class Manager : public Citizen{
     public:
         Manager(long id, const std::string &name, const std::string &lastName, int yearOfBirth, long salary);
         long getSalary() const;
