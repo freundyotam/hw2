@@ -22,10 +22,10 @@ namespace mtm
     public:
         Workplace(long id, std::string workplaceName, long workerSalary, long managerSalary);
 
-        long getId();
-        std::string getName();
-        long getWorkerSalary();
-        long getManagerSalary();
+        long getId() const;
+        std::string getName() const;
+        long getWorkerSalary() const;
+        long getManagerSalary() const;
 
         template <class Condition>
         void hireEmployee(Condition isHirable, Employee *employee, int managerId);
