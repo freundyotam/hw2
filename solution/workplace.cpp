@@ -37,11 +37,11 @@ void mtm::Workplace::hireEmployee(Condition isHirable, Employee *employee, int m
 
 void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 {
-    Manager *manager = managers.find(managerId)->second;
-    if (manager == NULL)
+    std::map<long, Manager *>::iterator iterator = managers.find(managerId);
+    if (iterator == managers.end())
         throw; // TODO: ManagerIsNotHired exception
 
-    manager->removeEmployee(employeeId);
+    (iterator->second)->removeEmployee(employeeId);
 }
 
 void mtm::Workplace::hireManager(Manager *manager)
