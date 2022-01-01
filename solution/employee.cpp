@@ -3,8 +3,10 @@
 //
 
 #include "employee.h"
+#include <set>
 
-mtm::Employee::Employee(long salary, int rank, const set <Skill> &skills) : salary(salary), rank(rank), skills(skills)
+
+mtm::Employee::Employee(long salary, int rank, const std::set<Skill> &skills) : salary(salary), rank(rank), skills(skills)
 {}
 
 long mtm::Employee::getSalary() const
