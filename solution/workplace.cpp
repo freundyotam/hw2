@@ -9,21 +9,21 @@ mtm::Workplace::Workplace(long id, std::string workplaceName, long workerSalary,
 {
 }
 
-std::string mtm::Workplace::getName()
+std::string mtm::Workplace::getName() const
 {
     return name;
 }
-long mtm::Workplace::getId()
+long mtm::Workplace::getId() const
 {
     return id;
 }
 
-long mtm::Workplace::getWorkerSalary()
+long mtm::Workplace::getWorkerSalary() const
 {
     return worker_salary;
 }
 
-long mtm::Workplace::getManagerSalary()
+long mtm::Workplace::getManagerSalary() const
 {
     return manager_salary;
 }
