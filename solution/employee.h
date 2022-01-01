@@ -9,9 +9,9 @@
 #include "citizen.h"
 #include "skill.h"
 namespace mtm{
-    class Employee : private mtm::Citizen{
+    class Employee : public mtm::Citizen{
         long salary;
-        int score;
+        int rank;
     public:
         long getSalary() const;
         void setSalary(long salary);
@@ -20,10 +20,10 @@ namespace mtm{
         void learnSkill(Skill skill);
         void forgetSkill(Skill skill);
         void hasSkill(Skill skill);
-        void printShort(std::ostream) const;
-        void printLong(std::ostream) const;
+        void printShort(std::ostream) const override;
+        void printLong(std::ostream) const override;
         Employee* clone();
-
+        Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth, long salary, int rank, const std::set<Skill> &skills);
     private:
         std::set<Skill> skills;
     public:
