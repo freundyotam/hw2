@@ -2,61 +2,87 @@
 
 #include <iostream>
 
-long mtm::Skill::getId() const
-{
-    return id;
-}
 
-const std::string &mtm::Skill::getName() const
-{
-    return name;
-}
+namespace mtm{
+    Skill::Skill(long id, const std::string &name, int requiredSkillPoints) : id(id), name(name),
+                                                                              required_skill_points(requiredSkillPoints)
+    {
 
-int mtm::Skill::getRequiredSkillPoints() const
-{
-    return required_skill_points;
-}
+    }
+    long Skill::getId() const
+    {
+        return id;
+    }
 
-bool mtm::Skill::operator==(const Skill &rhs) const
-{
-    return id == rhs.id &&
-           name == rhs.name &&
-           required_skill_points == rhs.required_skill_points;
-}
+    const std::string &mtm::Skill::getName() const
+    {
+        return name;
+    }
 
-bool mtm::Skill::operator!=(const Skill &rhs) const
-{
-    return !(rhs == *this);
-}
+    int Skill::getRequiredSkillPoints() const
+    {
+        return required_skill_points;
+    }
 
-bool mtm::Skill::operator<(const Skill &rhs) const
-{
-    if (id < rhs.id)
-        return true;
-    if (rhs.id < id)
-        return false;
-    if (name < rhs.name)
-        return true;
-    if (rhs.name < name)
-        return false;
-    return required_skill_points < rhs.required_skill_points;
-}
+    bool Skill::operator==(const Skill &rhs) const
+    {
+        return id == rhs.id;
+    }
 
-bool mtm::Skill::operator>(const Skill &rhs) const
-{
-    return rhs < *this;
-}
+    bool Skill::operator!=(const Skill &rhs) const
+    {
+        return !(rhs == *this);
+    }
 
-bool mtm::Skill::operator<=(const Skill &rhs) const
-{
-    return !(rhs < *this);
-}
+    bool Skill::operator<(const Skill &rhs) const
+    {
+        return rhs.getId() < id;
+    }
 
-bool mtm::Skill::operator>=(const Skill &rhs) const
-{
-    return !(*this < rhs);
-}
+    bool Skill::operator>(const Skill &rhs) const
+    {
+        return rhs < *this;
+    }
 
-mtm::Skill::Skill(long id, const std::string &name, int requiredSkillPoints) : id(id), name(name),
-                                                                          required_skill_points(requiredSkillPoints)
-{}
+    bool Skill::operator<=(const Skill &rhs) const
+    {
+        return !(rhs < *this);
+    }
+
+    bool Skill::operator>=(const Skill &rhs) const
+    {
+        return !(*this < rhs);
+    }
+
+    Skill &Skill::operator+=(const Skill &rhs)
+    {
+        this->required_skill_points += rhs.getRequiredSkillPoints();
+        return *this;
+    }
+
+    Skill Skill::operator++(int)
+    {
+        Skill copy1 = *this; // default copy c'tor
+        copy1.required_skill_points++;
+        return copy1;
+    }
+
+    Skill Skill::operator+(int points)
+    {
+        if(points < 0){
+            // throw negativePoints error
+        }
+        this->required_skill_points += points;
+        return *this;
+    }
+
+    std::ostream& operator<<(std::ostream &os, const Skill &skill)
+    {
+        return os << skill.getName() << " Level: " << skill.getRequiredSkillPoints() << "\n";
+    }
+
+
+}
+int main(int argc, char** s){
+    return 0;
+}
