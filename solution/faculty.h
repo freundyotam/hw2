@@ -3,6 +3,7 @@
 
 #include "skill.h"
 #include "employee.h"
+#include <string>
 
 namespace mtm
 {
@@ -48,7 +49,7 @@ namespace mtm
     void Faculty<Condition>::teach(Employee employee) const
     {
         if (!canTeach(employee))
-            throw string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
+            throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
 
         if (employee.hasSkill(skill))
             return;
