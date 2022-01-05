@@ -6,12 +6,23 @@ mtm::City::City(std::string name) : name(name)
 {
 }
 
-void mtm::City::addFaculty()
+void mtm::City::addEmployee(long id, std::string name, std::string lastName, int yearOfBirth)
 {
     throw std::string("NotImplemented");
 }
 
-void mtm::City::createWorkplace()
+void mtm::City::addManager(long id, std::string name, std::string lastName, int yearOfBirth)
+{
+    throw std::string("NotImplemented");
+}
+
+template <class Condition>
+void mtm::City::addFaculty(long id, Skill skill, int addedPoints, Condition canTeach)
+{
+    throw std::string("NotImplemented");
+}
+
+void mtm::City::createWorkplace(long id, std::string name, long workerSalary, long managerSalary)
 {
     throw std::string("NotImplemented");
 }
@@ -52,7 +63,7 @@ bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwo
     throw std::string("NotImplemented");
 }
 
-void mtm::City::prointAllEmployeesWithSkill(std::ostream &os, Skill skill)
+void mtm::City::printAllEmployeesWithSkill(std::ostream &os, Skill skill)
 {
     throw std::string("NotImplemented");
 }

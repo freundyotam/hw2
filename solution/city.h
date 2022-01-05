@@ -21,8 +21,11 @@ namespace mtm
 
     public:
         City(std::string name);
-        void addFaculty();
-        void createWorkplace();
+        void addEmployee(long id, std::string name, std::string lastName, int yearOfBirth);
+        void addManager(long id, std::string name, std::string lastName, int yearOfBirth);
+        template <class Condition>
+        void addFaculty(long id, Skill skill, int addedPoints, Condition canTeach);
+        void createWorkplace(long id, std::string name, long workerSalary, long managerSalary);
         void teachAtFaculty(long workerId, long facultyId);
         template <class Condition>
         void hireEmployeeAtWorkplace(Condition isHireable, long employeeId, long managerId, long workplaceId);
@@ -31,7 +34,7 @@ namespace mtm
         void fireManagerAtWorkplace(long managerId, long workplaceId);
         void getAllAboveSalary(std::ostream &os, long salary);
         bool isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId);
-        void prointAllEmployeesWithSkill(std::ostream &os, Skill skill);
+        void printAllEmployeesWithSkill(std::ostream &os, Skill skill);
     };
 
 } // namespace mtm
