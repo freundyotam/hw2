@@ -10,7 +10,7 @@ namespace mtm{
         return id;
     }
 
-    const std::string &Citizen::getName() const
+    const std::string &Citizen::getFirstName() const
     {
         return name;
     }
@@ -20,7 +20,7 @@ namespace mtm{
         return last_name;
     }
 
-    int Citizen::getYearOfBirth() const
+    int Citizen::getBirthYear() const
     {
         return year_of_birth;
     }
@@ -31,13 +31,33 @@ namespace mtm{
                                                                                                                     yearOfBirth)
     {}
 
-    void Citizen::printShort(std::ostream) const
+    bool Citizen::operator==(const Citizen &rhs) const
     {
-
-    }
-    void Citizen::printLong(std::ostream) const
-    {
-
+        return id == rhs.id;
     }
 
+    bool Citizen::operator!=(const Citizen &rhs) const
+    {
+        return !(rhs == *this);
+    }
+
+    bool Citizen::operator<(const Citizen &rhs) const
+    {
+        return id < rhs.id;
+    }
+
+    bool Citizen::operator>(const Citizen &rhs) const
+    {
+        return rhs < *this;
+    }
+
+    bool Citizen::operator<=(const Citizen &rhs) const
+    {
+        return !(rhs < *this);
+    }
+
+    bool Citizen::operator>=(const Citizen &rhs) const
+    {
+        return !(*this < rhs);
+    }
 }

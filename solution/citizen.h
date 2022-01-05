@@ -15,12 +15,18 @@ namespace mtm{
     public:
         Citizen(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
         long getId() const;
-        const std::string &getName() const;
+        const std::string &getFirstName() const;
         const std::string &getLastName() const;
-        int getYearOfBirth() const;
+        int getBirthYear() const;
         virtual void printShort(std::ostream) const;
         virtual void printLong(std::ostream) const;
-        Citizen* clone();
+        virtual Citizen* clone();
+        bool operator<(const Citizen &rhs) const;
+        bool operator>(const Citizen &rhs) const;
+        bool operator<=(const Citizen &rhs) const;
+        bool operator>=(const Citizen &rhs) const;
+        bool operator==(const Citizen &rhs) const;
+        bool operator!=(const Citizen &rhs) const;
     };
 
 }
