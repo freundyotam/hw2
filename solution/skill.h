@@ -22,8 +22,8 @@ namespace mtm{
         bool operator>=(const Skill &rhs) const;
         Skill operator++(int);
         Skill& operator+=(const Skill& rhs);
-        Skill operator+(const Skill&);
-        friend std::ostream& operator<<(std::ostream& os, const Skill& skill);
+        Skill operator+(int point);
+//        friend std::ostream& operator<<(std::ostream& os, const Skill& skill);
     };
 }
 
