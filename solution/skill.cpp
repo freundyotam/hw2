@@ -4,6 +4,11 @@
 
 
 namespace mtm{
+    Skill::Skill(long id, const std::string &name, int requiredSkillPoints) : id(id), name(name),
+                                                                              required_skill_points(requiredSkillPoints)
+    {
+
+    }
     long Skill::getId() const
     {
         return id;
@@ -59,9 +64,11 @@ namespace mtm{
         return !(*this < rhs);
     }
 
-    Skill::Skill(long id, const std::string &name, int requiredSkillPoints) : id(id), name(name),
-                                                                                   required_skill_points(requiredSkillPoints)
-    {}
+    std::ostream& operator<<(std::ostream &os, const Skill &skill)
+    {
+        return os;
+    }
+
 
 }
 int main(int argc, char** s){
