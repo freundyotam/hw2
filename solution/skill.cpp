@@ -26,9 +26,7 @@ namespace mtm{
 
     bool Skill::operator==(const Skill &rhs) const
     {
-        return id == rhs.id &&
-               name == rhs.name &&
-               required_skill_points == rhs.required_skill_points;
+        return id == rhs.id;
     }
 
     bool Skill::operator!=(const Skill &rhs) const
@@ -38,15 +36,7 @@ namespace mtm{
 
     bool Skill::operator<(const Skill &rhs) const
     {
-        if (id < rhs.id)
-            return true;
-        if (rhs.id < id)
-            return false;
-        if (name < rhs.name)
-            return true;
-        if (rhs.name < name)
-            return false;
-        return required_skill_points < rhs.required_skill_points;
+        return rhs.getId() < id;
     }
 
     bool Skill::operator>(const Skill &rhs) const
@@ -64,9 +54,31 @@ namespace mtm{
         return !(*this < rhs);
     }
 
+    Skill &Skill::operator+=(const Skill &rhs)
+    {
+        this->required_skill_points += rhs.getRequiredSkillPoints();
+        return *this;
+    }
+
+    Skill Skill::operator++(int)
+    {
+        Skill copy1 = *this; // default copy c'tor
+        copy1.required_skill_points++;
+        return copy1;
+    }
+
+    Skill Skill::operator+(int points)
+    {
+        if(points < 0){
+            // throw negativePoints error
+        }
+        this->required_skill_points += points;
+        return *this;
+    }
+
     std::ostream& operator<<(std::ostream &os, const Skill &skill)
     {
-        return os;
+        return os << skill.getName() << " Level: " << skill.getRequiredSkillPoints() << "\n";
     }
 
 
