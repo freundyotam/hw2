@@ -23,7 +23,7 @@ namespace mtm{
         Skill operator++(int);
         Skill& operator+=(const Skill& rhs);
         Skill operator+(const Skill&);
-
+        friend std::ostream& operator<<(std::ostream& os, const Skill& skill);
     };
 }
 
