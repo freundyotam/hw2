@@ -78,7 +78,7 @@ namespace mtm{
 
     std::ostream& operator<<(std::ostream &os, const Skill &skill)
     {
-        return os << skill.getName() << " Level: " << skill.getRequiredSkillPoints() << "\n";
+        return os << skill.getName() << " Level: " << skill.getRequiredSkillPoints() << std::endl;
     }
 
 

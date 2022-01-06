@@ -12,6 +12,7 @@ namespace mtm{
         std::string name;
         std::string last_name;
         int year_of_birth;
+        bool compare(const Citizen* citizen1, const Citizen* citizen2) const;
     public:
         Citizen(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
         long getId() const;
