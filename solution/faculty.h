@@ -35,6 +35,11 @@ namespace mtm
         }
 
         void teach(Employee employee) const;
+
+        bool operator<(const Faculty<Condition> &faculty) const
+        {
+            return this->id < faculty.getId();
+        }
     };
 
     template <class Condition>
