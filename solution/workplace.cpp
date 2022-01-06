@@ -2,10 +2,10 @@
 #include <string>
 #include <map>
 
-mtm::Workplace::Workplace(long id, std::string workplaceName, long workerSalary, long managerSalary) : id(id),
-                                                                                                       name(workplaceName),
-                                                                                                       worker_salary(workerSalary),
-                                                                                                       manager_salary(managerSalary)
+mtm::Workplace::Workplace(long id, const std::string &workplaceName, long workerSalary, long managerSalary) : id(id),
+                                                                                                              name(workplaceName),
+                                                                                                              worker_salary(workerSalary),
+                                                                                                              manager_salary(managerSalary)
 {
 }
 

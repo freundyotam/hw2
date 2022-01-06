@@ -13,14 +13,14 @@ namespace mtm
     {
     private:
         long id;
+        std::string name;
         long worker_salary;
         long manager_salary;
-        std::string name;
 
         std::map<long, Manager *> managers;
 
     public:
-        Workplace(long id, std::string workplaceName, long workerSalary, long managerSalary);
+        Workplace(long id, const std::string &workplaceName, long workerSalary, long managerSalary);
 
         long getId() const;
         std::string getName() const;
