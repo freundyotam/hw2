@@ -69,14 +69,14 @@ namespace mtm{
         return false;
     }
 
-    void Employee::forgetSkill(const Skill& skill)
+    void Employee::forgetSkill(long skill_id)
     {
-        if(!hasSkill(skill.getId())){
+        if(!hasSkill(skill_id)){
             // raise DidNotLearnSkill
         } else {
-            skills.erase(skill);
+            skills.erase(Skill(skill_id,"",0));
         }
-    } // todo change to id
+    } // todo Is this the right way to erase?
 
     Employee *Employee::clone()
     {

@@ -20,18 +20,27 @@ namespace mtm{
     {
         Manager::salary = +salary;
     }
-    void Manager::printShort(std::ostream) const
+    void Manager::printShort(std::ostream ostream) const
     {
-
+        ostream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << endl;
     }
-    void Manager::printLong(std::ostream) const
+    void Manager::printLong(std::ostream ostream) const
     {
-
+        ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << "birth_year - "
+        << getBirthYear() <<  " Salary: " << getSalary() << "Employees:" << endl;
+        set<Employee>::iterator it = employees.begin();
+        while (it != employees.end())
+        {
+            (*it).printShort(ostream);
+            it++;
+        } //Is this the correct way?
     }
 
-    Manager *Manager::clone() const
+    Manager *Manager::clone()
     {
-        return NULL;
+        Manager* copy = new Manager(getId(), getFirstName(), getLastName(), getBirthYear());
+        copy->employees = employees;
+        return copy; // Is this the correct way?
     }
 
     bool Manager::isEmployeeExists(Employee* employee)
@@ -63,7 +72,7 @@ namespace mtm{
         if(!isEmployeeExists(id)){
             //Raise EmployeeNotHired
         } else {
-            employees.erase(employees.find())
+            employees.erase(Employee(id, "", "", 0)); // Is this the correct way?
         }
     }
 
