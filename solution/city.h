@@ -2,7 +2,7 @@
 #define CITY_H
 
 #include <string>
-#include <map>
+#include <set>
 
 #include "citizen.h"
 #include "faculty.h"
@@ -15,9 +15,9 @@ namespace mtm
     {
     private:
         std::string name;
-        std::map<long, Citizen> citizens;
-        std::map<long, Faculty> faculties;
-        std::map<long, Workplace> workplaces;
+        std::set<Citizen> citizens;
+        std::set<Faculty> faculties;
+        std::set<Workplace> workplaces;
 
     public:
         City(std::string name);
