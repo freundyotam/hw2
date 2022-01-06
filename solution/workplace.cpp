@@ -1,11 +1,12 @@
 #include "workplace.h"
+#include <ostream>
 #include <string>
 #include <map>
 
-mtm::Workplace::Workplace(long id, std::string workplaceName, long workerSalary, long managerSalary) : id(id),
-                                                                                                       name(workplaceName),
-                                                                                                       worker_salary(workerSalary),
-                                                                                                       manager_salary(managerSalary)
+mtm::Workplace::Workplace(long id, const std::string &workplaceName, long workerSalary, long managerSalary) : id(id),
+                                                                                                              name(workplaceName),
+                                                                                                              worker_salary(workerSalary),
+                                                                                                              manager_salary(managerSalary)
 {
 }
 
@@ -56,7 +57,7 @@ void mtm::Workplace::fireManager(long managerId)
         throw std::string("ManagerNotHired"); // TODO: ManagerNotHired excception
 }
 
-std::ostream &mtm::operator<<(std::ostream &os, const mtm::Workplace &workplace)
+std::ostream &mtm::operator<<(std::ostream &os, const Workplace &workplace)
 {
     os << "Workplace name - " << workplace.getName();
 
