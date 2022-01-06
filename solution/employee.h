@@ -19,7 +19,7 @@ namespace mtm{
         int getScore() const;
         void learnSkill(const Skill& skill);
         void forgetSkill(const Skill& skill);
-        bool hasSkill(const Skill& skill);
+        bool hasSkill(long skill_id);
         void printShort(std::ostream) const override;
         void printLong(std::ostream) const override;
         Employee* clone() override;

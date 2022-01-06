@@ -51,26 +51,32 @@ namespace mtm{
 
     void Employee::learnSkill(const Skill& skill)
     {
-        if(this->hasSkill(skill)){
+        if(this->hasSkill(skill.getId())){
             // raise already here
         } else {
             skills.insert(skill);
         }
     }
 
-    bool Employee::hasSkill(const Skill& skill)
+    bool Employee::hasSkill(long skill_id)
     {
-        return skills.find(skill) != skills.end();
+        set<Skill>::iterator it = skills.begin();
+        while (it != skills.end())
+        {
+            if((*it).getId() == skill_id)
+                return true;
+        }
+        return false;
     }
 
     void Employee::forgetSkill(const Skill& skill)
     {
-        if(!hasSkill(skill)){
+        if(!hasSkill(skill.getId())){
             // raise DidNotLearnSkill
         } else {
             skills.erase(skill);
         }
-    }
+    } // todo change to id
 
     Employee *Employee::clone()
     {
