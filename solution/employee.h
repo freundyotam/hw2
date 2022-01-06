@@ -17,13 +17,13 @@ namespace mtm{
         void setSalary(long salary);
         void setScore(int score);
         int getScore() const;
-        void learnSkill(Skill skill);
-        void forgetSkill(Skill skill);
-        void hasSkill(Skill skill);
+        void learnSkill(const Skill& skill);
+        void forgetSkill(const Skill& skill);
+        bool hasSkill(const Skill& skill);
         void printShort(std::ostream) const override;
         void printLong(std::ostream) const override;
-        Employee* clone();
-        Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth, long salary, int rank, const std::set<Skill> &skills);
+        Employee* clone() override;
+        Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
     private:
         std::set<Skill> skills;
     public:

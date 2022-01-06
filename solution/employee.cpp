@@ -4,11 +4,11 @@
 
 #include "employee.h"
 #include <set>
+using namespace std;
 
 namespace mtm{
-    Employee::Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth, long salary,
-                       int rank, const std::set<Skill> &skills) : Citizen(id, name, lastName, yearOfBirth),
-                       salary(salary), rank(rank), skills(skills)
+    Employee::Employee(long id, const string &name, const string &lastName, int yearOfBirth) : Citizen(id, name, lastName, yearOfBirth),
+                       salary(0), rank(0)
     {
 
     }
@@ -23,22 +23,59 @@ namespace mtm{
         return rank;
     }
 
-    void Employee::setSalary(long salary)
+    void Employee::setSalary(long add_salary)
     {
-        Employee::salary = salary;
+        Employee::salary += add_salary;
     }
 
     void Employee::setScore(int score)
     {
         Employee::rank += score;
     }
-    void Employee::printShort(std::ostream) const
+    void Employee::printShort(ostream stream) const
     {
-
+        stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score : "
+                                                                                                << getScore() << endl;
     }
-    void Employee::printLong(std::ostream) const
+    void Employee::printLong(ostream stream) const
     {
-
+        stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
+        << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
+        set<Skill>::iterator it = skills.begin();
+        while (it != skills.end())
+        {
+            stream << (*it).getName() << endl;
+            it++;
+        }
     }
 
+    void Employee::learnSkill(const Skill& skill)
+    {
+        if(this->hasSkill(skill)){
+            // raise already here
+        } else {
+            skills.insert(skill);
+        }
+    }
+
+    bool Employee::hasSkill(const Skill& skill)
+    {
+        return skills.find(skill) != skills.end();
+    }
+
+    void Employee::forgetSkill(const Skill& skill)
+    {
+        if(!hasSkill(skill)){
+            // raise DidNotLearnSkill
+        } else {
+            skills.erase(skill);
+        }
+    }
+
+    Employee *Employee::clone()
+    {
+        Employee* copy = new Employee(getId(), getFirstName(), getLastName(),getBirthYear());
+        copy->skills = skills;
+        return copy; // Is this the right way to implement this? what about copy ctor for skill (that isn't implemented)?
+    }
 }
