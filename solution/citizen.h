@@ -18,9 +18,9 @@ namespace mtm{
         const std::string &getFirstName() const;
         const std::string &getLastName() const;
         int getBirthYear() const;
-        virtual void printShort(std::ostream) const;
-        virtual void printLong(std::ostream) const;
-        virtual Citizen* clone();
+        virtual void printShort(std::ostream) const = 0;
+        virtual void printLong(std::ostream) const = 0;
+        virtual Citizen* clone() = 0;
         bool operator<(const Citizen &rhs) const;
         bool operator>(const Citizen &rhs) const;
         bool operator<=(const Citizen &rhs) const;
