@@ -36,7 +36,8 @@ namespace mtm
 
         void teach(Employee employee) const;
 
-        bool operator<(const Faculty<Condition> &faculty) const
+        template <class RHSCondition>
+        bool operator<(const Faculty<RHSCondition> &faculty) const
         {
             return this->id < faculty.getId();
         }
