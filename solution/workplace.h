@@ -36,6 +36,8 @@ namespace mtm
 
         friend std::ostream &operator<<(std::ostream &os, const Workplace &workplace);
     };
+
+    std::ostream &operator<<(std::ostream &os, const Workplace &workplace);
 }
 
 #endif // WORKPLACE_H

@@ -1,4 +1,5 @@
 #include "workplace.h"
+#include <ostream>
 #include <string>
 #include <map>
 
@@ -56,7 +57,7 @@ void mtm::Workplace::fireManager(long managerId)
         throw std::string("ManagerNotHired"); // TODO: ManagerNotHired excception
 }
 
-std::ostream &mtm::operator<<(std::ostream &os, const mtm::Workplace &workplace)
+std::ostream &mtm::operator<<(std::ostream &os, const Workplace &workplace)
 {
     os << "Workplace name - " << workplace.getName();
 
