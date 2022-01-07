@@ -136,7 +136,7 @@ mtm::Employee &mtm::City::getEmployeeById(long id)
 {
     std::map<long, Employee>::iterator iterator = employees.find(id);
     if (iterator == employees.end())
-        throw std::string("CitizenDoesNotExist");
+        throw std::string("CitizenDoesNotExist"); // TODO: CitizenDoesNotExist exception
 
     return (*iterator).second;
 }
@@ -154,7 +154,7 @@ mtm::Faculty<mtm::Condition> &mtm::City::getFacultyById(long id)
 {
     std::map<long, Faculty<Condition>>::iterator iterator = faculties.find(id);
     if (iterator == faculties.end())
-        throw std::string("FacultyDoesNotExist");
+        throw std::string("FacultyDoesNotExist"); // TODO: FacultyDoesNotExist exception
 
     return (*iterator).second;
 }
@@ -163,7 +163,7 @@ mtm::Workplace &mtm::City::getWorkplaceById(long id)
 {
     std::map<long, Workplace>::iterator iterator = workplaces.find(id);
     if (iterator == workplaces.end())
-        throw std::string("WorkplaceDoesNotExist");
+        throw std::string("WorkplaceDoesNotExist"); // TODO: WorkplaceDoesNotExist exception
 
     return (*iterator).second;
 }
