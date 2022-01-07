@@ -43,15 +43,15 @@ void mtm::City::teachAtFaculty(long employeeId, long facultyId)
     faculty.teach(employee);
 }
 
-template <class TCondition>
-void mtm::City::hireEmployeeAtWorkplace(TCondition isHireable, long employeeId, long managerId, long workplaceId)
-{
-    Employee employee = getEmployeeById(employeeId);
-    Manager manager = getManagerById(managerId);
-    Workplace workplace = getWorkplaceById(workplaceId);
+// template <class TCondition>
+// void mtm::City::hireEmployeeAtWorkplace(TCondition isHireable, long employeeId, long managerId, long workplaceId)
+// {
+//     Employee employee = getEmployeeById(employeeId);
+//     Manager manager = getManagerById(managerId);
+//     Workplace workplace = getWorkplaceById(workplaceId);
 
-    workplace.hireEmployee(isHireable, &employee, managerId);
-}
+//     workplace.hireEmployee(isHireable, &employee, managerId);
+// }
 
 void mtm::City::hireManagerAtWorkplace(long managerId, long workplaceId)
 {

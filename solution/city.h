@@ -42,6 +42,16 @@ namespace mtm
         void printAllEmployeesWithSkill(std::ostream &os, long skillId);
     };
 
+    template <class TCondition>
+    void City::hireEmployeeAtWorkplace(TCondition isHireable, long employeeId, long managerId, long workplaceId)
+    {
+        Employee &employee = getEmployeeById(employeeId);
+        getManagerById(managerId);
+        Workplace &workplace = getWorkplaceById(workplaceId);
+
+        workplace.hireEmployee(isHireable, &employee, managerId);
+    }
+
 } // namespace mtm
 
 #endif // CITY_H
