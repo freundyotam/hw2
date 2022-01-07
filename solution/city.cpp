@@ -65,5 +65,38 @@ bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwo
 
 void mtm::City::printAllEmployeesWithSkill(std::ostream &os, Skill skill)
 {
-    throw std::string("NotImplemented");
+const mtm::Employee &mtm::City::getEmployeeById(long id)
+{
+    std::set<Employee>::iterator iterator = employees.find(Employee(id, "", "", 0));
+    if (iterator == employees.end())
+        throw std::string("CitizenDoesNotExist");
+
+    return *iterator;
+}
+
+const mtm::Manager &mtm::City::getManagerById(long id)
+{
+    std::set<Manager>::iterator iterator = managers.find(Manager(id, "", "", 0));
+    if (iterator == managers.end())
+        throw std::string("CitizenDoesNotExist");
+
+    return *iterator;
+}
+
+const mtm::Faculty<mtm::Condition> &mtm::City::getFacultyById(long id)
+{
+    std::set<Faculty<Condition>>::iterator iterator = faculties.find(Faculty<Condition>(id));
+    if (iterator == faculties.end())
+        throw std::string("FacultyDoesNotExist");
+
+    return *iterator;
+}
+
+const mtm::Workplace &mtm::City::getWorkplaceById(long id)
+{
+    std::set<Workplace>::iterator iterator = workplaces.find(Workplace(id, "", 0, 0));
+    if (iterator == workplaces.end())
+        throw std::string("WorkplaceDoesNotExist");
+
+    return *iterator;
 }

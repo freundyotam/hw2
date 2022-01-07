@@ -20,6 +20,11 @@ namespace mtm
         std::set<Faculty<Condition>> faculties;
         std::set<Workplace> workplaces;
 
+        const Employee &getEmployeeById(long id);
+        const Manager &getManagerById(long id);
+        const Faculty<Condition> &getFacultyById(long id);
+        const Workplace &getWorkplaceById(long id);
+
     public:
         City(std::string name);
         void addEmployee(long id, std::string name, std::string lastName, int yearOfBirth);
