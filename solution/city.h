@@ -15,8 +15,9 @@ namespace mtm
     {
     private:
         std::string name;
-        std::set<Citizen> citizens;
-        std::set<Faculty> faculties;
+        std::set<Employee> employees;
+        std::set<Manager> managers;
+        std::set<Faculty<Condition>> faculties;
         std::set<Workplace> workplaces;
 
     public:
