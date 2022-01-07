@@ -15,15 +15,15 @@ namespace mtm
     {
     private:
         std::string name;
-        std::set<Employee> employees;
-        std::set<Manager> managers;
-        std::set<Faculty<Condition>> faculties;
-        std::set<Workplace> workplaces;
+        std::map<long, Employee> employees;
+        std::map<long, Manager> managers;
+        std::map<long, Faculty<Condition>> faculties;
+        std::map<long, Workplace> workplaces;
 
-        const Employee &getEmployeeById(long id);
-        const Manager &getManagerById(long id);
-        const Faculty<Condition> &getFacultyById(long id);
-        const Workplace &getWorkplaceById(long id);
+        Employee &getEmployeeById(long id);
+        Manager &getManagerById(long id);
+        Faculty<Condition> &getFacultyById(long id);
+        Workplace &getWorkplaceById(long id);
 
     public:
         City(std::string name);
@@ -39,7 +39,7 @@ namespace mtm
         void fireManagerAtWorkplace(long managerId, long workplaceId);
         void getAllAboveSalary(std::ostream &os, long salary);
         bool isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId);
-        void printAllEmployeesWithSkill(std::ostream &os, Skill skill);
+        void printAllEmployeesWithSkill(std::ostream &os, long skillId);
     };
 
 } // namespace mtm
