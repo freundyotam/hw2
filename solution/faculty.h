@@ -57,7 +57,7 @@ namespace mtm
         if (!canTeach(employee))
             throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
 
-        if (employee.hasSkill(skill))
+        if (employee.hasSkill(skill.getId()))
             return;
 
         employee.learnSkill(skill);
