@@ -37,6 +37,13 @@ namespace mtm
         friend std::ostream &operator<<(std::ostream &os, const Workplace &workplace);
     };
 
+    template <class Condition>
+    void mtm::Workplace::hireEmployee(Condition isHirable, Employee *employee, int managerId)
+    {
+        if (!isHirable(employee))
+            throw std::string("EmployeeNotSelected"); // TODO: EmployeeNotSelected exception
+    }
+
     std::ostream &operator<<(std::ostream &os, const Workplace &workplace);
 }
 
