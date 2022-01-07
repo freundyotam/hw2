@@ -43,6 +43,7 @@ void mtm::Workplace::fireEmployee(long employeeId, long managerId)
         throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
 
     (*iterator).second->removeEmployee(employeeId);
+    // TODO: remove employee's salary
 }
 
 void mtm::Workplace::hireManager(Manager *manager)
