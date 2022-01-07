@@ -29,12 +29,9 @@ namespace mtm
         City(std::string name);
         void addEmployee(long id, std::string name, std::string lastName, int yearOfBirth);
         void addManager(long id, std::string name, std::string lastName, int yearOfBirth);
-        template <class Condition>
-        void addFaculty(long id, Skill skill, int addedPoints, Condition canTeach);
-        void createWorkplace(long id, std::string name, long workerSalary, long managerSalary);
-        void teachAtFaculty(long workerId, long facultyId);
-        template <class Condition>
-        void hireEmployeeAtWorkplace(Condition isHireable, long employeeId, long managerId, long workplaceId);
+        void addFaculty(long id, Skill skill, int addedPoints, Condition *canTeach);
+        void createWorkplace(long id, std::string name, long employeeSalary, long managerSalary);
+        void teachAtFaculty(long employeeId, long facultyId);
         template <class TCondition>
         void hireEmployeeAtWorkplace(TCondition isHireable, long employeeId, long managerId, long workplaceId);
         void hireManagerAtWorkplace(long managerId, long workplaceId);

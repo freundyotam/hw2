@@ -34,9 +34,13 @@ void mtm::City::createWorkplace(long id, std::string name, long employeeSalary, 
         throw std::string("workplaceAlreadyExists");
 }
 
-void mtm::City::teachAtFaculty(long workerId, long facultyId)
+void mtm::City::teachAtFaculty(long employeeId, long facultyId)
 {
-    throw std::string("NotImplemented");
+
+    Employee employee = getEmployeeById(employeeId);
+    Faculty<Condition> faculty = getFacultyById(facultyId);
+
+    faculty.teach(employee);
 }
 
 template <class TCondition>
@@ -76,16 +80,53 @@ void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
 
 void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 {
-    throw std::string("NotImplemented");
+    std::set<Manager>::iterator it_manager = managers.begin();
+    std::set<Employee>::iterator it_employee = employees.begin();
+
+    while (it_manager != managers.end() && it_employee != employees.end())
+    {
+        if (*it_employee > *it_manager)
+        {
+            if ((*it_employee).getSalary() > salary)
+                (*it_employee).printLong(os);
+            ++it_employee;
+        }
+        else
+        {
+            if ((*it_manager).getSalary() > salary)
+                (*it_manager).printLong(os);
+            ++it_manager;
+        }
+    }
+
+    while (it_manager != managers.end())
+    {
+        if ((*it_manager).getSalary() > salary)
+            (*it_manager).printLong(os);
+        ++it_manager;
+    }
+
+    while (it_employee != employees.end())
+    {
+        if ((*it_employee).getSalary() > salary)
+            (*it_employee).printLong(os);
+        ++it_employee;
+    }
 }
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)
 {
-    throw std::string("NotImplemented");
 }
 
 void mtm::City::printAllEmployeesWithSkill(std::ostream &os, Skill skill)
 {
+    for (Employee employee : employees)
+    {
+        if (employee.hasSkill(skill.getId()))
+            employee.printShort(os);
+    }
+}
+
 const mtm::Employee &mtm::City::getEmployeeById(long id)
 {
     std::set<Employee>::iterator iterator = employees.find(Employee(id, "", "", 0));
