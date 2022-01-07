@@ -41,7 +41,7 @@ namespace mtm
             return added_points;
         }
 
-        void teach(Employee employee) const;
+        void teach(Employee &employee) const;
 
         template <class RHSCondition>
         bool operator<(const Faculty<RHSCondition> &faculty) const
@@ -59,14 +59,9 @@ namespace mtm
     }
 
     template <class TCondition>
-    Faculty<TCondition>::Faculty(long id) : id(id)
+    void Faculty<TCondition>::teach(Employee &employee) const
     {
-    }
-
-    template <class TCondition>
-    void Faculty<TCondition>::teach(Employee employee) const
-    {
-        if (!canTeach(employee))
+        if (!(*canTeach)(&employee))
             throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
 
         if (employee.hasSkill(skill.getId()))
