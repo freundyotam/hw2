@@ -7,17 +7,23 @@
 
 namespace mtm
 {
-    template <class Condition>
+    class Condition
+    {
+    public:
+        virtual bool operator()(Employee *employee) = 0;
+    };
+
+    template <class TCondition>
     class Faculty
     {
     private:
         long id;
         int added_points;
         Skill skill;
-        Condition canTeach;
+        TCondition canTeach;
 
     public:
-        Faculty(long id, Skill skill, int addedPoints, Condition canTeach);
+        Faculty(long id, Skill skill, int addedPoints, TCondition canTeach);
 
         Skill getSkill() const
         {
@@ -43,21 +49,21 @@ namespace mtm
         }
     };
 
-    template <class Condition>
-    Faculty<Condition>::Faculty(long id, Skill skill, int addedPoints, Condition canTeach) : id(id),
-                                                                                             added_points(addedPoints),
-                                                                                             skill(skill),
-                                                                                             canTeach(canTeach)
+    template <class TCondition>
+    Faculty<TCondition>::Faculty(long id, Skill skill, int addedPoints, TCondition canTeach) : id(id),
+                                                                                               added_points(addedPoints),
+                                                                                               skill(skill),
+                                                                                               canTeach(canTeach)
     {
     }
 
-    template <class Condition>
-    void Faculty<Condition>::teach(Employee employee) const
+    template <class TCondition>
+    void Faculty<TCondition>::teach(Employee employee) const
     {
         if (!canTeach(employee))
             throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
 
-        if (employee.hasSkill(skill))
+        if (employee.hasSkill(skill.getId()))
             return;
 
         employee.learnSkill(skill);
