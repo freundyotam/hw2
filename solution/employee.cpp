@@ -32,12 +32,12 @@ namespace mtm{
     {
         Employee::rank += score;
     }
-    void Employee::printShort(ostream stream) const
+    void Employee::printShort(ostream& stream) const
     {
         stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score : "
                                                                                                 << getScore() << endl;
     }
-    void Employee::printLong(ostream stream) const
+    void Employee::printLong(ostream& stream) const
     {
         stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
         << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
@@ -51,26 +51,32 @@ namespace mtm{
 
     void Employee::learnSkill(const Skill& skill)
     {
-        if(this->hasSkill(skill)){
+        if(this->hasSkill(skill.getId())){
             // raise already here
         } else {
             skills.insert(skill);
         }
     }
 
-    bool Employee::hasSkill(const Skill& skill)
+    bool Employee::hasSkill(long skill_id)
     {
-        return skills.find(skill) != skills.end();
+        set<Skill>::iterator it = skills.begin();
+        while (it != skills.end())
+        {
+            if((*it).getId() == skill_id)
+                return true;
+        }
+        return false;
     }
 
-    void Employee::forgetSkill(const Skill& skill)
+    void Employee::forgetSkill(long skill_id)
     {
-        if(!hasSkill(skill)){
+        if(!hasSkill(skill_id)){
             // raise DidNotLearnSkill
         } else {
-            skills.erase(skill);
+            skills.erase(Skill(skill_id,"",0));
         }
-    }
+    } // todo Is this the right way to erase?
 
     Employee *Employee::clone()
     {
