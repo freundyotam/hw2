@@ -8,23 +8,30 @@ mtm::City::City(std::string name) : name(name)
 
 void mtm::City::addEmployee(long id, std::string name, std::string lastName, int yearOfBirth)
 {
-    throw std::string("NotImplemented");
+    Employee employee(id, name, lastName, yearOfBirth);
+    if (!employees.insert(employee).second)
+        throw std::string("CitizenAlreadyExists");
 }
 
 void mtm::City::addManager(long id, std::string name, std::string lastName, int yearOfBirth)
 {
-    throw std::string("NotImplemented");
+    Manager manager(id, name, lastName, yearOfBirth);
+    if (!managers.insert(manager).second)
+        throw std::string("CitizenAlreadyExists");
 }
 
-template <class Condition>
-void mtm::City::addFaculty(long id, Skill skill, int addedPoints, Condition canTeach)
+void mtm::City::addFaculty(long id, Skill skill, int addedPoints, Condition *canTeach)
 {
-    throw std::string("NotImplemented");
+    Faculty<Condition> faculty(id, skill, addedPoints, canTeach);
+    if (!faculties.insert(faculty).second)
+        throw std::string("FacultyAlreadyExists");
 }
 
-void mtm::City::createWorkplace(long id, std::string name, long workerSalary, long managerSalary)
+void mtm::City::createWorkplace(long id, std::string name, long employeeSalary, long managerSalary)
 {
-    throw std::string("NotImplemented");
+    Workplace workplace(id, name, employeeSalary, managerSalary);
+    if (!workplaces.insert(workplace).second)
+        throw std::string("workplaceAlreadyExists");
 }
 
 void mtm::City::teachAtFaculty(long workerId, long facultyId)
