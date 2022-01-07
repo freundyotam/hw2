@@ -20,10 +20,11 @@ namespace mtm
         long id;
         int added_points;
         Skill skill;
-        TCondition canTeach;
+        TCondition *canTeach;
 
     public:
-        Faculty(long id, Skill skill, int addedPoints, TCondition canTeach);
+        Faculty(long id);
+        Faculty(long id, Skill skill, int addedPoints, TCondition *canTeach);
 
         Skill getSkill() const
         {
@@ -50,10 +51,15 @@ namespace mtm
     };
 
     template <class TCondition>
-    Faculty<TCondition>::Faculty(long id, Skill skill, int addedPoints, TCondition canTeach) : id(id),
-                                                                                               added_points(addedPoints),
-                                                                                               skill(skill),
-                                                                                               canTeach(canTeach)
+    Faculty<TCondition>::Faculty(long id, Skill skill, int addedPoints, TCondition *canTeach) : id(id),
+                                                                                                added_points(addedPoints),
+                                                                                                skill(skill),
+                                                                                                canTeach(canTeach)
+    {
+    }
+
+    template <class TCondition>
+    Faculty<TCondition>::Faculty(long id) : id(id)
     {
     }
 
