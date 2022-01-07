@@ -68,7 +68,7 @@ namespace mtm
             return;
 
         employee.learnSkill(skill);
-        employee.setScore(employee.getScore() + this->added_points);
+        employee.setScore(this->added_points);
     }
 }
 #endif // FACULTY_H
