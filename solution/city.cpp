@@ -39,25 +39,39 @@ void mtm::City::teachAtFaculty(long workerId, long facultyId)
     throw std::string("NotImplemented");
 }
 
-template <class Condition>
-void mtm::City::hireEmployeeAtWorkplace(Condition isHireable, long employeeId, long managerId, long workplaceId)
+template <class TCondition>
+void mtm::City::hireEmployeeAtWorkplace(TCondition isHireable, long employeeId, long managerId, long workplaceId)
 {
-    throw std::string("NotImplemented");
+    Employee employee = getEmployeeById(employeeId);
+    Manager manager = getManagerById(managerId);
+    Workplace workplace = getWorkplaceById(workplaceId);
+
+    workplace.hireEmployee(isHireable, &employee, managerId);
 }
 
 void mtm::City::hireManagerAtWorkplace(long managerId, long workplaceId)
 {
-    throw std::string("NotImplemented");
+    Manager manager = getManagerById(managerId);
+    Workplace workplace = getWorkplaceById(workplaceId);
+
+    workplace.hireManager(&manager);
 }
 
-void mtm::City::fireEmployeeAtWorkplace(long employeeId, long workplaceId)
+void mtm::City::fireEmployeeAtWorkplace(long employeeId, long managerId, long workplaceId)
 {
-    throw std::string("NotImplemented");
+    Employee employee = getEmployeeById(employeeId);
+    Manager manager = getManagerById(managerId);
+    Workplace workplace = getWorkplaceById(workplaceId);
+
+    workplace.fireEmployee(employeeId, managerId);
 }
 
 void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
 {
-    throw std::string("NotImplemented");
+    Manager manager = getManagerById(managerId);
+    Workplace workplace = getWorkplaceById(workplaceId);
+
+    workplace.fireManager(managerId);
 }
 
 void mtm::City::getAllAboveSalary(std::ostream &os, long salary)

@@ -35,8 +35,10 @@ namespace mtm
         void teachAtFaculty(long workerId, long facultyId);
         template <class Condition>
         void hireEmployeeAtWorkplace(Condition isHireable, long employeeId, long managerId, long workplaceId);
+        template <class TCondition>
+        void hireEmployeeAtWorkplace(TCondition isHireable, long employeeId, long managerId, long workplaceId);
         void hireManagerAtWorkplace(long managerId, long workplaceId);
-        void fireEmployeeAtWorkplace(long employeeId, long workplaceId);
+        void fireEmployeeAtWorkplace(long employeeId, long managerId, long workplaceId);
         void fireManagerAtWorkplace(long managerId, long workplaceId);
         void getAllAboveSalary(std::ostream &os, long salary);
         bool isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId);
