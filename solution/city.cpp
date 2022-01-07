@@ -85,16 +85,16 @@ void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 
     while (it_manager != managers.end() && it_employee != employees.end())
     {
-        if ((*it_employee).first > (*it_manager).first)
+        if ((*it_employee).first < (*it_manager).first)
         {
             if ((*it_employee).second.getSalary() > salary)
-                (*it_employee).second.printLong(os);
+                (*it_employee).second.printShort(os);
             ++it_employee;
         }
         else
         {
             if ((*it_manager).second.getSalary() > salary)
-                (*it_manager).second.printLong(os);
+                (*it_manager).second.printShort(os);
             ++it_manager;
         }
     }
@@ -102,14 +102,14 @@ void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
     while (it_manager != managers.end())
     {
         if ((*it_manager).second.getSalary() > salary)
-            (*it_manager).second.printLong(os);
+            (*it_manager).second.printShort(os);
         ++it_manager;
     }
 
     while (it_employee != employees.end())
     {
         if ((*it_employee).second.getSalary() > salary)
-            (*it_employee).second.printLong(os);
+            (*it_employee).second.printShort(os);
         ++it_employee;
     }
 }
