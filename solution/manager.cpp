@@ -20,11 +20,11 @@ namespace mtm{
     {
         Manager::salary = +salary;
     }
-    void Manager::printShort(std::ostream ostream) const
+    void Manager::printShort(std::ostream& ostream) const
     {
         ostream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << endl;
     }
-    void Manager::printLong(std::ostream ostream) const
+    void Manager::printLong(std::ostream& ostream) const
     {
         ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << "birth_year - "
         << getBirthYear() <<  " Salary: " << getSalary() << "Employees:" << endl;

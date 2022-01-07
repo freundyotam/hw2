@@ -16,8 +16,8 @@ namespace mtm{
         void addEmployee(Employee* employee);
         void removeEmployee(long citizen_id);
         void setSalary(long salary);
-        void printShort(std::ostream) const;
-        void printLong(std::ostream) const;
+        void printShort(std::ostream&) const;
+        void printLong(std::ostream&) const;
         Manager* clone() override;
     private:
         bool isEmployeeExists(Employee* employee);

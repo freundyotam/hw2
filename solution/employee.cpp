@@ -32,12 +32,12 @@ namespace mtm{
     {
         Employee::rank += score;
     }
-    void Employee::printShort(ostream stream) const
+    void Employee::printShort(ostream& stream) const
     {
         stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score : "
                                                                                                 << getScore() << endl;
     }
-    void Employee::printLong(ostream stream) const
+    void Employee::printLong(ostream& stream) const
     {
         stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
         << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
