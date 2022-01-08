@@ -62,12 +62,8 @@ void mtm::City::fireEmployeeAtWorkplace(long employeeId, long managerId, long wo
 
 void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
 {
-    // Manager &manager = getManagerById(managerId);
+    getManagerById(managerId);
     Workplace &workplace = getWorkplaceById(workplaceId);
-    // for (Employee employee : manager.getEmployees()) // <- Need this function
-    // {
-    //     workplace.fireEmployee(employeeId, managerId);
-    // }
 
     workplace.fireManager(managerId);
 }
