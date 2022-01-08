@@ -29,32 +29,33 @@ long mtm::Workplace::getManagerSalary() const
     return manager_salary;
 }
 
-template <class Condition>
-void mtm::Workplace::hireEmployee(Condition isHirable, Employee *employee, int managerId)
-{
-    if (!isHirable(employee))
-        throw std::string("EmployeeNotSelected"); // TODO: EmployeeNotSelected exception
-}
-
 void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 {
     std::map<long, Manager *>::iterator iterator = managers.find(managerId);
     if (iterator == managers.end())
         throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
 
-    (iterator->second)->removeEmployee(employeeId);
+    (*iterator).second->removeEmployee(employeeId);
+    // TODO: remove employee's salary
 }
 
 void mtm::Workplace::hireManager(Manager *manager)
 {
     if (!managers.insert({manager->getId(), manager}).second)
         throw std::string("ManagerAlreadyHired"); // TODO: ManagerAlreadyHired exception
+
+    manager->setSalary(this->manager_salary);
 }
 
 void mtm::Workplace::fireManager(long managerId)
 {
-    if (managers.erase(managerId) == 0)
-        throw std::string("ManagerNotHired"); // TODO: ManagerNotHired excception
+    std::map<long, Manager *>::iterator iterator = managers.find(managerId);
+    if (iterator == managers.end())
+        throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
+
+    (*iterator).second->setSalary(-this->manager_salary);
+
+    managers.erase(iterator);
 }
 
 std::ostream &mtm::operator<<(std::ostream &os, const Workplace &workplace)

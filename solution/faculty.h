@@ -20,10 +20,11 @@ namespace mtm
         long id;
         int added_points;
         Skill skill;
-        TCondition canTeach;
+        TCondition *canTeach;
 
     public:
-        Faculty(long id, Skill skill, int addedPoints, TCondition canTeach);
+        Faculty(long id);
+        Faculty(long id, Skill skill, int addedPoints, TCondition *canTeach);
 
         Skill getSkill() const
         {
@@ -40,7 +41,7 @@ namespace mtm
             return added_points;
         }
 
-        void teach(Employee employee) const;
+        void teach(Employee &employee) const;
 
         template <class RHSCondition>
         bool operator<(const Faculty<RHSCondition> &faculty) const
@@ -50,24 +51,24 @@ namespace mtm
     };
 
     template <class TCondition>
-    Faculty<TCondition>::Faculty(long id, Skill skill, int addedPoints, TCondition canTeach) : id(id),
-                                                                                               added_points(addedPoints),
-                                                                                               skill(skill),
-                                                                                               canTeach(canTeach)
+    Faculty<TCondition>::Faculty(long id, Skill skill, int addedPoints, TCondition *canTeach) : id(id),
+                                                                                                added_points(addedPoints),
+                                                                                                skill(skill),
+                                                                                                canTeach(canTeach)
     {
     }
 
     template <class TCondition>
-    void Faculty<TCondition>::teach(Employee employee) const
+    void Faculty<TCondition>::teach(Employee &employee) const
     {
-        if (!canTeach(employee))
+        if (!(*canTeach)(&employee))
             throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
 
         if (employee.hasSkill(skill.getId()))
             return;
 
         employee.learnSkill(skill);
-        employee.setScore(employee.getScore() + this->added_points);
+        employee.setScore(this->added_points);
     }
 }
 #endif // FACULTY_H

@@ -37,6 +37,20 @@ namespace mtm
         friend std::ostream &operator<<(std::ostream &os, const Workplace &workplace);
     };
 
+    template <class Condition>
+    void mtm::Workplace::hireEmployee(Condition isHirable, Employee *employee, int managerId)
+    {
+        if (!isHirable(employee))
+            throw std::string("EmployeeNotSelected"); // TODO: EmployeeNotSelected exception
+
+        std::map<long, Manager *>::iterator iterator = managers.find(managerId);
+        if (iterator == managers.end())
+            throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
+
+        (*iterator).second->addEmployee(employee);
+        employee->setSalary(this->worker_salary);
+    }
+
     std::ostream &operator<<(std::ostream &os, const Workplace &workplace);
 }
 
