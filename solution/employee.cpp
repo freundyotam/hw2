@@ -65,6 +65,7 @@ namespace mtm{
         {
             if((*it).getId() == skill_id)
                 return true;
+            it++;
         }
         return false;
     }
