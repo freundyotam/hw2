@@ -28,6 +28,8 @@ namespace mtm
         long getWorkerSalary() const;
         long getManagerSalary() const;
 
+        bool isEmployed(long id);
+
         template <class Condition>
         void hireEmployee(Condition isHirable, Employee *employee, int managerId);
         void fireEmployee(long employeeId, long managerId);

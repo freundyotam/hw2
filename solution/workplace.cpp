@@ -29,6 +29,11 @@ long mtm::Workplace::getManagerSalary() const
     return manager_salary;
 }
 
+bool mtm::Workplace::isEmployed(long id)
+{
+    return employees.count(id) > 0;
+}
+
 void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 {
     std::map<long, Manager *>::iterator manager_it = managers.find(managerId);
