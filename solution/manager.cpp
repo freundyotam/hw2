@@ -76,4 +76,23 @@ namespace mtm{
         }
     }
 
+    const Employee* Manager::getEmployeeById(long id)
+    {
+        set<Employee>::iterator it = employees.begin();
+        while (it != employees.end())
+        {
+            if((*it).getId() == id){
+                return &(*it);
+            }
+            it++;
+        }
+        return NULL;
+    }
+
+    std::set<Employee> Manager::getEmployeeSet() const
+    {
+        return this->employees;
+    }
+
+
 }

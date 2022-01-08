@@ -13,11 +13,13 @@ namespace mtm{
     public:
         Manager(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
         long getSalary() const;
+        std::set<Employee> getEmployeeSet() const;
         void addEmployee(Employee* employee);
         void removeEmployee(long citizen_id);
         void setSalary(long salary);
         void printShort(std::ostream&) const;
         void printLong(std::ostream&) const;
+        const Employee* getEmployeeById(long id);
         Manager* clone() override;
     private:
         bool isEmployeeExists(Employee* employee);
