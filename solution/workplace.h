@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 
+#include "exceptions.h"
 #include "employee.h"
 #include "manager.h"
 

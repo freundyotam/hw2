@@ -1,6 +1,7 @@
 #ifndef FACULTY_H
 #define FACULTY_H
 
+#include "exceptions.h"
 #include "skill.h"
 #include "employee.h"
 #include <string>
