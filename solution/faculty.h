@@ -42,7 +42,7 @@ namespace mtm
             return added_points;
         }
 
-        void teach(Employee &employee) const;
+        void teach(Employee *employee) const;
 
         template <class RHSCondition>
         bool operator<(const Faculty<RHSCondition> &faculty) const
@@ -60,7 +60,7 @@ namespace mtm
     }
 
     template <class TCondition>
-    void Faculty<TCondition>::teach(Employee &employee) const
+    void Faculty<TCondition>::teach(Employee *employee) const
     {
         if (!(*canTeach)(&employee))
             throw EmployeeNotAccepted();

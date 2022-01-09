@@ -38,7 +38,7 @@ void mtm::City::teachAtFaculty(long employeeId, long facultyId)
     Employee &employee = getEmployeeById(employeeId);
     Faculty<Condition> &faculty = getFacultyById(facultyId);
 
-    faculty.teach(employee);
+    faculty.teach(&employee);
 }
 
 void mtm::City::hireManagerAtWorkplace(long managerId, long workplaceId)
