@@ -64,6 +64,10 @@ namespace mtm
     class DidNotLearnSkill : public Exception
     {
     };
+
+    class CanNotHireManager : public Exception
+    {
+    };
 }
 
 #endif // EXCEPTIONS_H

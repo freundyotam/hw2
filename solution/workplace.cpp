@@ -54,6 +54,9 @@ void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 
 void mtm::Workplace::hireManager(Manager *manager)
 {
+    if (manager->getSalary() > 0)
+        throw CanNotHireManager();
+
     if (!managers.insert({manager->getId(), manager}).second)
         throw ManagerAlreadyHired();
 
