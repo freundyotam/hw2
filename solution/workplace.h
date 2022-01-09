@@ -18,6 +18,7 @@ namespace mtm
         long manager_salary;
 
         std::map<long, Manager *> managers;
+        std::map<long, Employee *> employees;
 
     public:
         Workplace(long id, const std::string &workplaceName, long workerSalary, long managerSalary);
@@ -26,6 +27,8 @@ namespace mtm
         std::string getName() const;
         long getWorkerSalary() const;
         long getManagerSalary() const;
+
+        bool isEmployed(long id);
 
         template <class Condition>
         void hireEmployee(Condition isHirable, Employee *employee, int managerId);
@@ -49,6 +52,7 @@ namespace mtm
 
         (*iterator).second->addEmployee(employee);
         employee->setSalary(this->worker_salary);
+        employees.insert({employee->getId(), employee});
     }
 
     std::ostream &operator<<(std::ostream &os, const Workplace &workplace);

@@ -29,14 +29,25 @@ long mtm::Workplace::getManagerSalary() const
     return manager_salary;
 }
 
+bool mtm::Workplace::isEmployed(long id)
+{
+    return employees.count(id) > 0;
+}
+
 void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 {
-    std::map<long, Manager *>::iterator iterator = managers.find(managerId);
-    if (iterator == managers.end())
+    std::map<long, Manager *>::iterator manager_it = managers.find(managerId);
+    if (manager_it == managers.end())
         throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
 
-    (*iterator).second->removeEmployee(employeeId);
-    // TODO: remove employee's salary
+    (*manager_it).second->removeEmployee(employeeId);
+
+    std::map<long, Employee *>::iterator employee_it = this->employees.find(employeeId);
+    if (employee_it != employees.end())
+    {
+        (*employee_it).second->setSalary(-this->worker_salary);
+        employees.erase(employee_it);
+    }
 }
 
 void mtm::Workplace::hireManager(Manager *manager)
@@ -54,6 +65,11 @@ void mtm::Workplace::fireManager(long managerId)
         throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
 
     (*iterator).second->setSalary(-this->manager_salary);
+
+    for (Employee employee : (*iterator).second->getEmployeeSet())
+    {
+        this->fireEmployee(employee.getId(), managerId);
+    }
 
     managers.erase(iterator);
 }

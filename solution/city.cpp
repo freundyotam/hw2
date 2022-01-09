@@ -62,12 +62,8 @@ void mtm::City::fireEmployeeAtWorkplace(long employeeId, long managerId, long wo
 
 void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
 {
-    // Manager &manager = getManagerById(managerId);
+    getManagerById(managerId);
     Workplace &workplace = getWorkplaceById(workplaceId);
-    // for (Employee employee : manager.getEmployees()) // <- Need this function
-    // {
-    //     workplace.fireEmployee(employeeId, managerId);
-    // }
 
     workplace.fireManager(managerId);
 }
@@ -110,6 +106,14 @@ void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)
 {
+    for (std::pair<long, Workplace> id_workplace_pair : workplaces)
+    {
+        Workplace &workplace = id_workplace_pair.second;
+
+        if (workplace.isEmployed(employeeOneId) && workplace.isEmployed(employeeTwoId))
+            return true;
+    }
+
     return false;
 }
 

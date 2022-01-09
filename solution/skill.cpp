@@ -81,8 +81,4 @@ namespace mtm{
         return os << skill.getName() << " Level: " << skill.getRequiredSkillPoints() << std::endl;
     }
 
-
-}
-int main(int argc, char** s){
-    return 0;
 }
