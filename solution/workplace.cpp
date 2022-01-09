@@ -1,4 +1,6 @@
 #include "workplace.h"
+#include "exceptions.h"
+
 #include <ostream>
 #include <string>
 #include <map>
@@ -38,7 +40,7 @@ void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 {
     std::map<long, Manager *>::iterator manager_it = managers.find(managerId);
     if (manager_it == managers.end())
-        throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
+        throw ManagerIsNotHired();
 
     (*manager_it).second->removeEmployee(employeeId);
 
@@ -53,7 +55,7 @@ void mtm::Workplace::fireEmployee(long employeeId, long managerId)
 void mtm::Workplace::hireManager(Manager *manager)
 {
     if (!managers.insert({manager->getId(), manager}).second)
-        throw std::string("ManagerAlreadyHired"); // TODO: ManagerAlreadyHired exception
+        throw ManagerAlreadyHired();
 
     manager->setSalary(this->manager_salary);
 }
@@ -62,7 +64,7 @@ void mtm::Workplace::fireManager(long managerId)
 {
     std::map<long, Manager *>::iterator iterator = managers.find(managerId);
     if (iterator == managers.end())
-        throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
+        throw ManagerIsNotHired();
 
     (*iterator).second->setSalary(-this->manager_salary);
 
