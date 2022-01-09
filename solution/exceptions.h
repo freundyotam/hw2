@@ -1,3 +1,6 @@
+#ifndef EXCEPTIONS_H
+#define EXCEPTIONS_H
+
 #include <exception>
 
 namespace mtm
@@ -62,3 +65,5 @@ namespace mtm
     {
     };
 }
+
+#endif // EXCEPTIONS_H
