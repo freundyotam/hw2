@@ -62,7 +62,7 @@ namespace mtm
     void Faculty<TCondition>::teach(Employee &employee) const
     {
         if (!(*canTeach)(&employee))
-            throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
+            throw EmployeeNotAccepted();
 
         if (employee.hasSkill(skill.getId()))
             return;
