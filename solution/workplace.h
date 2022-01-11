@@ -4,6 +4,7 @@
 #include <string>
 #include <map>
 
+#include "exceptions.h"
 #include "employee.h"
 #include "manager.h"
 
@@ -44,11 +45,11 @@ namespace mtm
     void mtm::Workplace::hireEmployee(Condition isHirable, Employee *employee, int managerId)
     {
         if (!isHirable(employee))
-            throw std::string("EmployeeNotSelected"); // TODO: EmployeeNotSelected exception
+            throw EmployeeNotSelected();
 
         std::map<long, Manager *>::iterator iterator = managers.find(managerId);
         if (iterator == managers.end())
-            throw std::string("ManagerIsNotHired"); // TODO: ManagerIsNotHired exception
+            throw ManagerIsNotHired();
 
         (*iterator).second->addEmployee(employee);
         employee->setSalary(this->worker_salary);

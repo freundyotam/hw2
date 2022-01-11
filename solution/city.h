@@ -7,6 +7,7 @@
 #include "citizen.h"
 #include "faculty.h"
 #include "workplace.h"
+#include "exceptions.h"
 #include "skill.h"
 
 namespace mtm

@@ -2,6 +2,7 @@
 // Created by yotam freund on 29/12/2021.
 //
 
+#include "exceptions.h"
 #include "manager.h"
 using namespace std;
 
@@ -62,7 +63,7 @@ namespace mtm{
     void Manager::addEmployee(Employee* employee)
     {
         if(isEmployeeExists(employee)){
-            //raise EmployeeAlreadyHired
+            throw EmployeeAlreadyHired();
         } else {
             employees.insert(*employee);
         }
@@ -70,7 +71,7 @@ namespace mtm{
     void Manager::removeEmployee(long id)
     {
         if(!isEmployeeExists(id)){
-            //Raise EmployeeNotHired
+            throw EmployeeIsNotHired();
         } else {
             employees.erase(Employee(id, "", "", 0)); // Is this the correct way?
         }

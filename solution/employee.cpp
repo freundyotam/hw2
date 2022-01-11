@@ -3,6 +3,7 @@
 //
 
 #include "employee.h"
+#include "exceptions.h"
 #include <set>
 using namespace std;
 
@@ -52,8 +53,10 @@ namespace mtm{
     void Employee::learnSkill(const Skill& skill)
     {
         if(this->hasSkill(skill.getId())){
-            // raise already here
-        } else {
+            throw SkillAlreadyLearned();
+        }
+        else
+        {
             skills.insert(skill);
         }
     }
@@ -73,8 +76,10 @@ namespace mtm{
     void Employee::forgetSkill(long skill_id)
     {
         if(!hasSkill(skill_id)){
-            // raise DidNotLearnSkill
-        } else {
+            throw DidNotLearnSkill();
+        }
+        else
+        {
             skills.erase(Skill(skill_id,"",0));
         }
     } // todo Is this the right way to erase?

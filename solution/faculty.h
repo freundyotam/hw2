@@ -1,6 +1,7 @@
 #ifndef FACULTY_H
 #define FACULTY_H
 
+#include "exceptions.h"
 #include "skill.h"
 #include "employee.h"
 #include <string>
@@ -41,7 +42,7 @@ namespace mtm
             return added_points;
         }
 
-        void teach(Employee &employee) const;
+        void teach(Employee *employee) const;
 
         template <class RHSCondition>
         bool operator<(const Faculty<RHSCondition> &faculty) const
@@ -59,10 +60,10 @@ namespace mtm
     }
 
     template <class TCondition>
-    void Faculty<TCondition>::teach(Employee &employee) const
+    void Faculty<TCondition>::teach(Employee *employee) const
     {
         if (!(*canTeach)(&employee))
-            throw std::string("EmployeeNotAccepted"); // TODO: EmployeeNotAccepted Exception
+            throw EmployeeNotAccepted();
 
         if (employee.hasSkill(skill.getId()))
             return;
