@@ -28,12 +28,10 @@ namespace mtm{
     {
         ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << "birth_year - "
         << getBirthYear() <<  " Salary: " << getSalary() << "Employees:" << endl;
-        set<Employee>::iterator it = employees.begin();
-        while (it != employees.end())
+        for (const std::pair<long, Employee *> employee_pair : this->employees)
         {
-            (*it).printShort(ostream);
-            it++;
-        } //Is this the correct way?
+            employee_pair.second->printShort(ostream);
+        }
     }
 
     Manager *Manager::clone()
@@ -45,26 +43,19 @@ namespace mtm{
 
     bool Manager::isEmployeeExists(Employee* employee)
     {
-        return employees.find(*employee) != employees.end();
+        return isEmployeeExists(employee->getId());
     }
+
     bool Manager::isEmployeeExists(long id)
     {
-        set<Employee>::iterator it = employees.begin();
-        while (it != employees.end())
-        {
-            if((*it).getId() == id){
-                return true;
-            }
-            it++;
-        }
-        return false; //Code duplicates??
+        return employees.count(id) > 0;
     }
     void Manager::addEmployee(Employee* employee)
     {
         if(isEmployeeExists(employee)){
             //raise EmployeeAlreadyHired
         } else {
-            employees.insert(*employee);
+            employees.insert({employee->getId(), employee});
         }
     }
     void Manager::removeEmployee(long id)
@@ -72,24 +63,19 @@ namespace mtm{
         if(!isEmployeeExists(id)){
             //Raise EmployeeNotHired
         } else {
-            employees.erase(Employee(id, "", "", 0)); // Is this the correct way?
+            employees.erase(id); // Is this the correct way?
         }
     }
 
-    const Employee* Manager::getEmployeeById(long id)
+    Employee *Manager::getEmployeeById(long id)
     {
-        set<Employee>::iterator it = employees.begin();
-        while (it != employees.end())
-        {
-            if((*it).getId() == id){
-                return &(*it);
-            }
-            it++;
-        }
-        return NULL;
+        if (isEmployeeExists(id))
+            throw; // EmployeeDoesNotExist();
+
+        return (*employees.find(id)).second;
     }
 
-    std::set<Employee> Manager::getEmployeeSet() const
+    std::map<long, Employee *> Manager::getEmployeeSet() const
     {
         return this->employees;
     }
