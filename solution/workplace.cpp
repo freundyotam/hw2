@@ -33,7 +33,13 @@ long mtm::Workplace::getManagerSalary() const
 
 bool mtm::Workplace::isEmployed(long id)
 {
-    return employees.count(id) > 0;
+    for (auto manager_pair : managers)
+    {
+        if (manager_pair.second->getEmployeeSet().count(id) > 0)
+            return true;
+    }
+
+    return false;
 }
 
 void mtm::Workplace::fireEmployee(long employeeId, long managerId)
@@ -42,14 +48,11 @@ void mtm::Workplace::fireEmployee(long employeeId, long managerId)
     if (manager_it == managers.end())
         throw ManagerIsNotHired();
 
+    if ((*manager_it).second->getEmployeeSet().count(employeeId) == 0)
+        throw EmployeeIsNotHired();
+    Employee *emp = (*manager_it).second->getEmployeeById(employeeId);
+    emp->setSalary(-this->worker_salary);
     (*manager_it).second->removeEmployee(employeeId);
-
-    std::map<long, Employee *>::iterator employee_it = this->employees.find(employeeId);
-    if (employee_it != employees.end())
-    {
-        (*employee_it).second->setSalary(-this->worker_salary);
-        employees.erase(employee_it);
-    }
 }
 
 void mtm::Workplace::hireManager(Manager *manager)
