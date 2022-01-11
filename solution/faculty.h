@@ -62,14 +62,14 @@ namespace mtm
     template <class TCondition>
     void Faculty<TCondition>::teach(Employee *employee) const
     {
-        if (!(*canTeach)(&employee))
+        if (!(*canTeach)(employee))
             throw EmployeeNotAccepted();
 
-        if (employee.hasSkill(skill.getId()))
+        if (employee->hasSkill(skill.getId()))
             return;
 
-        employee.learnSkill(skill);
-        employee.setScore(this->added_points);
+        employee->learnSkill(skill);
+        employee->setScore(this->added_points);
     }
 }
 #endif // FACULTY_H
