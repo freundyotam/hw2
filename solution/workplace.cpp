@@ -71,9 +71,9 @@ void mtm::Workplace::fireManager(long managerId)
 
     (*iterator).second->setSalary(-this->manager_salary);
 
-    for (Employee employee : (*iterator).second->getEmployeeSet())
+    for (auto employee_pair : (*iterator).second->getEmployeeSet())
     {
-        this->fireEmployee(employee.getId(), managerId);
+        employee_pair.second->setSalary(-this->worker_salary);
     }
 
     managers.erase(iterator);
