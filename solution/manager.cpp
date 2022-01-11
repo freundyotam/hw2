@@ -70,7 +70,7 @@ namespace mtm{
 
     Employee *Manager::getEmployeeById(long id)
     {
-        if (isEmployeeExists(id))
+        if (!isEmployeeExists(id))
             throw; // EmployeeDoesNotExist();
 
         return (*employees.find(id)).second;
