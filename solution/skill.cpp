@@ -1,4 +1,5 @@
 #include "skill.h"
+#include "exceptions.h"
 
 #include <iostream>
 
@@ -54,23 +55,26 @@ namespace mtm{
         return !(*this < rhs);
     }
 
-    Skill &Skill::operator+=(const Skill &rhs)
+    Skill &Skill::operator+=(const int rhs)
     {
-        this->required_skill_points += rhs.getRequiredSkillPoints();
+        if(rhs < 0){
+            throw NegativePoints();
+        }
+        this->required_skill_points += rhs;
         return *this;
     }
 
     Skill Skill::operator++(int)
     {
         Skill copy1 = *this; // default copy c'tor
-        copy1.required_skill_points++;
+        this->required_skill_points++;
         return copy1;
     }
 
     Skill Skill::operator+(int points)
     {
         if(points < 0){
-            // throw negativePoints error
+            throw NegativePoints();
         }
         this->required_skill_points += points;
         return *this;
@@ -78,7 +82,7 @@ namespace mtm{
 
     std::ostream& operator<<(std::ostream &os, const Skill &skill)
     {
-        return os << skill.getName() << " Level: " << skill.getRequiredSkillPoints() << std::endl;
+        return os << skill.getName() << std::endl;
     }
 
 }
