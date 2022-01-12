@@ -22,14 +22,14 @@ void mtm::City::addFaculty(long id, Skill skill, int addedPoints, Condition *can
 {
     Faculty<Condition> faculty(id, skill, addedPoints, canTeach);
     if (!faculties.insert({id, faculty}).second)
-        throw CitizenAlreadyExists();
+        throw FacultyAlreadyExists();
 }
 
 void mtm::City::createWorkplace(long id, std::string name, long employeeSalary, long managerSalary)
 {
     Workplace workplace(id, name, employeeSalary, managerSalary);
     if (!workplaces.insert({id, workplace}).second)
-        throw CitizenAlreadyExists();
+        throw WorkplaceAlreadyExists();
 }
 
 void mtm::City::teachAtFaculty(long employeeId, long facultyId)
@@ -121,7 +121,7 @@ mtm::Employee &mtm::City::getEmployeeById(long id)
 {
     std::map<long, Employee>::iterator iterator = employees.find(id);
     if (iterator == employees.end())
-        throw CitizenDoesNotExist();
+        throw EmployeeDoesNotExist();
 
     return (*iterator)
         .second;
@@ -131,7 +131,7 @@ mtm::Manager &mtm::City::getManagerById(long id)
 {
     std::map<long, Manager>::iterator iterator = managers.find(id);
     if (iterator == managers.end())
-        throw CitizenDoesNotExist();
+        throw ManagerDoesNotExist();
 
     return (*iterator).second;
 }
