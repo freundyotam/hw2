@@ -71,28 +71,40 @@ void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
     workplace.fireManager(managerId);
 }
 
-int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
+void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 {
+    std::map<long, Manager>::iterator it_manager = managers.begin();
+    std::map<long, Employee>::iterator it_employee = employees.begin();
 
-    std::map<long, Citizen *> citizen_map;
-    for (auto manager_pair : managers)
+    while (it_manager != managers.end() && it_employee != employees.end())
     {
-        if (manager_pair.second.getSalary() > salary)
-            citizen_map.insert({manager_pair.first, &manager_pair.second});
+        if ((*it_employee).first < (*it_manager).first)
+        {
+            if ((*it_employee).second.getSalary() > salary)
+                (*it_employee).second.printShort(os);
+            ++it_employee;
+        }
+        else
+        {
+            if ((*it_manager).second.getSalary() > salary)
+                (*it_manager).second.printShort(os);
+            ++it_manager;
+        }
     }
 
-    for (auto employee_pair : employees)
+    while (it_manager != managers.end())
     {
-        if (employee_pair.second.getSalary() > salary)
-            citizen_map.insert({employee_pair.first, &employee_pair.second});
+        if ((*it_manager).second.getSalary() > salary)
+            (*it_manager).second.printShort(os);
+        ++it_manager;
     }
 
-    for (auto citizen_pair : citizen_map)
+    while (it_employee != employees.end())
     {
-        citizen_pair.second->printShort(os);
+        if ((*it_employee).second.getSalary() > salary)
+            (*it_employee).second.printShort(os);
+        ++it_employee;
     }
-
-    return citizen_map.size();
 }
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)

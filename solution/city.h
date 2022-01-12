@@ -38,7 +38,7 @@ namespace mtm
         void hireManagerAtWorkplace(long managerId, long workplaceId);
         void fireEmployeeAtWorkplace(long employeeId, long managerId, long workplaceId);
         void fireManagerAtWorkplace(long managerId, long workplaceId);
-        int getAllAboveSalary(std::ostream &os, long salary);
+        void getAllAboveSalary(std::ostream &os, long salary);
         bool isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId);
         void printAllEmployeesWithSkill(std::ostream &os, long skillId);
     };
