@@ -35,7 +35,7 @@ namespace mtm{
     }
     void Employee::printShort(ostream& stream) const
     {
-        stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score : "
+        stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score: "
                                                                                                 << getScore() << endl;
     }
     void Employee::printLong(ostream& stream) const
