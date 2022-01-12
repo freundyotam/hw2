@@ -4,24 +4,20 @@
 #include <sstream>
 #include "../solution/skill.h"
 #include "skill_test.h"
-#include <cassert>
 #include <iostream>
+#include <cassert>
+
 using namespace std;
-
-void check_members();
-void check_logic_operators();
-void check_printing();
-
 using namespace mtm;
 
 void test_skill(){
-    check_members();
-    check_logic_operators();
-    check_printing();
+    check_skill_members();
+    check_skill_logic_operators();
+    check_skill_printing();
     cout << "[*] Skill tests succeeded\n";
 }
 
-void check_printing()
+void check_skill_printing()
 {
     Skill s1(12, "a", 1);
     std::ostringstream out;
@@ -29,7 +25,7 @@ void check_printing()
     assert("a\n" == out.str());
 }
 
-void check_logic_operators()
+void check_skill_logic_operators()
 {
     long id1 = 1;
     std::string name1 = "Playing chess";
@@ -55,7 +51,7 @@ void check_logic_operators()
 
 }
 
-void check_members()
+void check_skill_members()
 {
     long id1 = 1;
     std::string name1 = "Playing chess";
@@ -64,10 +60,4 @@ void check_members()
     assert(s1.getId() == id1);
     assert(s1.getName() == name1);
     assert(s1.getRequiredSkillPoints() == points1);
-}
-
-int main(int argc, char** argv){
-    test_skill();
-
-    return 0;
 }

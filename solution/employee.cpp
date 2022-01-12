@@ -55,10 +55,11 @@ namespace mtm{
         if(this->hasSkill(skill.getId())){
             throw SkillAlreadyLearned();
         }
-        else
+        else if(this->getScore() < skill.getRequiredSkillPoints())
         {
-            skills.insert(skill);
+            throw CanNotLearnSkill();
         }
+        skills.insert(skill);
     }
 
     bool Employee::hasSkill(long skill_id)
