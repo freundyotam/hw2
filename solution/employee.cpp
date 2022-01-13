@@ -35,7 +35,7 @@ namespace mtm{
     }
     void Employee::printShort(ostream& stream) const
     {
-        stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score : "
+        stream << getFirstName() << " " << getLastName() << endl << "Salary: " << getSalary() << " Score: "
                                                                                                 << getScore() << endl;
     }
     void Employee::printLong(ostream& stream) const
@@ -55,10 +55,11 @@ namespace mtm{
         if(this->hasSkill(skill.getId())){
             throw SkillAlreadyLearned();
         }
-        else
+        else if(this->getScore() < skill.getRequiredSkillPoints())
         {
-            skills.insert(skill);
+            throw CanNotLearnSkill();
         }
+        skills.insert(skill);
     }
 
     bool Employee::hasSkill(long skill_id)
