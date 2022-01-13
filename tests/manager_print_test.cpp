@@ -6,7 +6,7 @@ using namespace mtm;
 using std::cout;
 using std::endl;
 
-int main() {
+int manager_print_test() {
     Employee e1(1, "John", "Williams", 2002);
     Skill s1(1,"C++",0);
     Skill s2(2, "Java", 0);

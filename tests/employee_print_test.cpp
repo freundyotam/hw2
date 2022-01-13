@@ -4,7 +4,7 @@ using namespace mtm;
 using std::cout;
 using std::endl;
 
-int main(){
+int main_employee_print_test(){
     Employee e1(1, "John", "Williams", 2002);
     cout << "Short Print" << endl;
     e1.printShort(cout);
