@@ -13,7 +13,19 @@ namespace mtm
     {
     };
 
-    class CitizenDoesNotExist : public Exception
+    class EmployeeDoesNotExist : public Exception
+    {
+    };
+
+    class ManagerDoesNotExist : public Exception
+    {
+    };
+
+    class WorkplaceAlreadyExists : public Exception
+    {
+    };
+
+    class FacultyAlreadyExists : public Exception
     {
     };
 

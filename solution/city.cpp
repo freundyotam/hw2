@@ -22,14 +22,14 @@ void mtm::City::addFaculty(long id, Skill skill, int addedPoints, Condition *can
 {
     Faculty<Condition> faculty(id, skill, addedPoints, canTeach);
     if (!faculties.insert({id, faculty}).second)
-        throw CitizenAlreadyExists();
+        throw FacultyAlreadyExists();
 }
 
 void mtm::City::createWorkplace(long id, std::string name, long employeeSalary, long managerSalary)
 {
     Workplace workplace(id, name, employeeSalary, managerSalary);
     if (!workplaces.insert({id, workplace}).second)
-        throw CitizenAlreadyExists();
+        throw WorkplaceAlreadyExists();
 }
 
 void mtm::City::teachAtFaculty(long employeeId, long facultyId)
@@ -71,8 +71,9 @@ void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
     workplace.fireManager(managerId);
 }
 
-void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
+int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 {
+    int counter = 0;
     std::map<long, Manager>::iterator it_manager = managers.begin();
     std::map<long, Employee>::iterator it_employee = employees.begin();
 
@@ -81,13 +82,19 @@ void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
         if ((*it_employee).first < (*it_manager).first)
         {
             if ((*it_employee).second.getSalary() > salary)
+            {
                 (*it_employee).second.printShort(os);
+                counter++;
+            }
             ++it_employee;
         }
         else
         {
             if ((*it_manager).second.getSalary() > salary)
+            {
                 (*it_manager).second.printShort(os);
+                counter++;
+            }
             ++it_manager;
         }
     }
@@ -95,16 +102,24 @@ void mtm::City::getAllAboveSalary(std::ostream &os, long salary)
     while (it_manager != managers.end())
     {
         if ((*it_manager).second.getSalary() > salary)
+        {
             (*it_manager).second.printShort(os);
+            counter++;
+        }
         ++it_manager;
     }
 
     while (it_employee != employees.end())
     {
         if ((*it_employee).second.getSalary() > salary)
+        {
             (*it_employee).second.printShort(os);
+            counter++;
+        }
         ++it_employee;
     }
+
+    return counter;
 }
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)
@@ -133,7 +148,7 @@ mtm::Employee &mtm::City::getEmployeeById(long id)
 {
     std::map<long, Employee>::iterator iterator = employees.find(id);
     if (iterator == employees.end())
-        throw CitizenDoesNotExist();
+        throw EmployeeDoesNotExist();
 
     return (*iterator)
         .second;
@@ -143,7 +158,7 @@ mtm::Manager &mtm::City::getManagerById(long id)
 {
     std::map<long, Manager>::iterator iterator = managers.find(id);
     if (iterator == managers.end())
-        throw CitizenDoesNotExist();
+        throw ManagerDoesNotExist();
 
     return (*iterator).second;
 }
