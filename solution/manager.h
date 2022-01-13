@@ -13,6 +13,7 @@ namespace mtm{
     class Manager : public Citizen{
     public:
         Manager(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
+        ~Manager() = default;
         long getSalary() const;
         std::map<long, Employee *> getEmployeeSet() const;
         void addEmployee(Employee* employee);

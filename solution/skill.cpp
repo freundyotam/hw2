@@ -85,4 +85,12 @@ namespace mtm{
         return os << skill.getName() << std::endl;
     }
 
+     Skill operator+(int i, Skill& skill)
+    {
+        if (i < 0){
+            throw NegativePoints();
+        }
+        skill.required_skill_points += i;
+        return skill;
+    }
 }

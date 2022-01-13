@@ -13,6 +13,7 @@ namespace mtm{
         long salary;
         int rank;
     public:
+        ~Employee() = default;
         long getSalary() const;
         void setSalary(long salary);
         void setScore(int score);
