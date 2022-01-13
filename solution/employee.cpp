@@ -82,7 +82,14 @@ namespace mtm{
     Employee *Employee::clone()
     {
         Employee* copy = new Employee(getId(), getFirstName(), getLastName(),getBirthYear());
-        copy->skills = skills;
-        return copy; // Is this the right way to implement this? what about copy ctor for skill (that isn't implemented)?
+        map<long, const Skill *> copy_skills;
+        for (const std::pair<long, const Skill *> pair : this->skills)
+        {
+            const Skill* ptr = pair.second;
+            copy_skills.insert({pair.first, ptr});
+        }
+
+        copy->skills = copy_skills;
+        return copy;
     }
 }
