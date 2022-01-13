@@ -124,6 +124,8 @@ int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)
 {
+    getEmployeeById(employeeOneId);
+    getEmployeeById(employeeTwoId);
     for (std::pair<long, Workplace> id_workplace_pair : workplaces)
     {
         Workplace &workplace = id_workplace_pair.second;
