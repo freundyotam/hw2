@@ -7,14 +7,14 @@ mtm::City::City(std::string name) : name(name)
 void mtm::City::addEmployee(long id, std::string name, std::string lastName, int yearOfBirth)
 {
     Employee employee(id, name, lastName, yearOfBirth);
-    if (!employees.insert({id, employee}).second)
+    if (managers.count(id) > 0 || !employees.insert({id, employee}).second)
         throw CitizenAlreadyExists();
 }
 
 void mtm::City::addManager(long id, std::string name, std::string lastName, int yearOfBirth)
 {
     Manager manager(id, name, lastName, yearOfBirth);
-    if (!managers.insert({id, manager}).second)
+    if (employees.count(id) > 0 || !managers.insert({id, manager}).second)
         throw CitizenAlreadyExists();
 }
 
