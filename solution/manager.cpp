@@ -2,14 +2,15 @@
 // Created by yotam freund on 29/12/2021.
 //
 
+#include <map>
 #include "exceptions.h"
 #include "manager.h"
 using namespace std;
 
 namespace mtm{
     Manager::Manager(long id, const std::string &name, const std::string &lastName, int yearOfBirth) :
-    Citizen(
-            id, name, lastName, yearOfBirth), salary(0)
+            Citizen(
+                    id, name, lastName, yearOfBirth), salary(0)
     {}
 
     long Manager::getSalary() const
@@ -19,7 +20,7 @@ namespace mtm{
 
     void Manager::setSalary(long salary)
     {
-        Manager::salary = +salary;
+        Manager::salary += salary;
     }
     void Manager::printShort(std::ostream& ostream) const
     {
@@ -27,8 +28,8 @@ namespace mtm{
     }
     void Manager::printLong(std::ostream& ostream) const
     {
-        ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << "birth_year - "
-        << getBirthYear() <<  " Salary: " << getSalary() << "Employees:" << endl;
+        ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - "
+                << getBirthYear() << endl << "Salary: " << getSalary() << endl << "Employees:" << endl;
         for (const std::pair<long, Employee *> employee_pair : this->employees)
         {
             employee_pair.second->printShort(ostream);
@@ -38,8 +39,13 @@ namespace mtm{
     Manager *Manager::clone()
     {
         Manager* copy = new Manager(getId(), getFirstName(), getLastName(), getBirthYear());
-        copy->employees = employees;
-        return copy; // Is this the correct way?
+        map<long, Employee *> copy_employees;
+        for (const std::pair<long, Employee *> pair : this->employees)
+        {
+            copy_employees.insert({pair.first, pair.second->clone()});
+        }
+        copy->employees = copy_employees;
+        return copy;
     }
 
     bool Manager::isEmployeeExists(Employee* employee)
@@ -64,15 +70,15 @@ namespace mtm{
         if(!isEmployeeExists(id)){
             throw EmployeeIsNotHired();
         } else {
-            employees.erase(id); // Is this the correct way?
+            employees.erase(id);
         }
     }
 
     Employee *Manager::getEmployeeById(long id)
     {
-        if (!isEmployeeExists(id))
-            throw; // EmployeeDoesNotExist();
-
+        if (!isEmployeeExists(id)) {
+            throw EmployeeIsNotHired();
+    }
         return (*employees.find(id)).second;
     }
 
