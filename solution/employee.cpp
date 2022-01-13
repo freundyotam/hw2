@@ -44,23 +44,23 @@ namespace mtm{
         stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
         << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
 
-        for (const std::pair<long, const Skill *> pair : this->skills)
+        for (const std::pair<long, const Skill> pair : this->skills)
         {
-            stream << pair.second->getName() << endl;
+            stream << pair.second.getName() << endl;
         }
     }
 
-    void Employee::learnSkill(const Skill* skill)
+    void Employee::learnSkill(const Skill skill)
     {
 
-        if(this->hasSkill(skill->getId())){
+        if(this->hasSkill(skill.getId())){
             throw SkillAlreadyLearned();
         }
-        else if(this->getScore() < skill->getRequiredSkillPoints())
+        else if(this->getScore() < skill.getRequiredSkillPoints())
         {
             throw CanNotLearnSkill();
         }
-        skills.insert({skill->getId(), skill});
+        skills.insert({skill.getId(), skill});
     }
 
     bool Employee::hasSkill(long skill_id)
@@ -82,11 +82,10 @@ namespace mtm{
     Employee *Employee::clone()
     {
         Employee* copy = new Employee(getId(), getFirstName(), getLastName(),getBirthYear());
-        map<long, const Skill *> copy_skills;
-        for (const std::pair<long, const Skill *> pair : this->skills)
+        map<long, const Skill> copy_skills;
+        for (const std::pair<long, Skill> pair : this->skills)
         {
-            const Skill* ptr = pair.second;
-            copy_skills.insert({pair.first, ptr});
+            copy_skills.insert({pair.first, pair.second});
         }
 
         copy->skills = copy_skills;
