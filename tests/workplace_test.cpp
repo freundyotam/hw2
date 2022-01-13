@@ -44,7 +44,9 @@ void test_workplace(){
     ASSERT_EXCEPTION(w1.fireManager(m1.getId()), ManagerIsNotHired);
 
     // Check hire employee
-    w1.hireEmployee(hireEmployeeTrue, &e1, m1.getId());
+    w1.hireManager(&m1);
+    Employee e2(44,"33", "3", 222);
+    w1.hireEmployee(hireEmployeeTrue, &e2, m1.getId());
     assert(w1.isEmployed(e1.getId()));
 
     // Check hire employee twice
