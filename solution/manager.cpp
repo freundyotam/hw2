@@ -2,14 +2,15 @@
 // Created by yotam freund on 29/12/2021.
 //
 
+#include <map>
 #include "exceptions.h"
 #include "manager.h"
 using namespace std;
 
 namespace mtm{
     Manager::Manager(long id, const std::string &name, const std::string &lastName, int yearOfBirth) :
-    Citizen(
-            id, name, lastName, yearOfBirth), salary(0)
+            Citizen(
+                    id, name, lastName, yearOfBirth), salary(0)
     {}
 
     long Manager::getSalary() const
@@ -19,7 +20,7 @@ namespace mtm{
 
     void Manager::setSalary(long salary)
     {
-        Manager::salary = +salary;
+        Manager::salary += salary;
     }
     void Manager::printShort(std::ostream& ostream) const
     {
@@ -27,45 +28,41 @@ namespace mtm{
     }
     void Manager::printLong(std::ostream& ostream) const
     {
-        ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << "birth_year - "
-        << getBirthYear() <<  " Salary: " << getSalary() << "Employees:" << endl;
-        set<Employee>::iterator it = employees.begin();
-        while (it != employees.end())
+        ostream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - "
+                << getBirthYear() << endl << "Salary: " << getSalary() << endl << "Employees:" << endl;
+        for (const std::pair<long, Employee *> employee_pair : this->employees)
         {
-            (*it).printShort(ostream);
-            it++;
-        } //Is this the correct way?
+            employee_pair.second->printShort(ostream);
+        }
     }
 
     Manager *Manager::clone()
     {
         Manager* copy = new Manager(getId(), getFirstName(), getLastName(), getBirthYear());
-        copy->employees = employees;
-        return copy; // Is this the correct way?
+        map<long, Employee *> copy_employees;
+        for (const std::pair<long, Employee *> pair : this->employees)
+        {
+            copy_employees.insert({pair.first, pair.second->clone()});
+        }
+        copy->employees = copy_employees;
+        return copy;
     }
 
     bool Manager::isEmployeeExists(Employee* employee)
     {
-        return employees.find(*employee) != employees.end();
+        return isEmployeeExists(employee->getId());
     }
+
     bool Manager::isEmployeeExists(long id)
     {
-        set<Employee>::iterator it = employees.begin();
-        while (it != employees.end())
-        {
-            if((*it).getId() == id){
-                return true;
-            }
-            it++;
-        }
-        return false; //Code duplicates??
+        return employees.count(id) > 0;
     }
     void Manager::addEmployee(Employee* employee)
     {
         if(isEmployeeExists(employee)){
             throw EmployeeAlreadyHired();
         } else {
-            employees.insert(*employee);
+            employees.insert({employee->getId(), employee});
         }
     }
     void Manager::removeEmployee(long id)
@@ -73,24 +70,19 @@ namespace mtm{
         if(!isEmployeeExists(id)){
             throw EmployeeIsNotHired();
         } else {
-            employees.erase(Employee(id, "", "", 0)); // Is this the correct way?
+            employees.erase(id);
         }
     }
 
-    const Employee* Manager::getEmployeeById(long id)
+    Employee *Manager::getEmployeeById(long id)
     {
-        set<Employee>::iterator it = employees.begin();
-        while (it != employees.end())
-        {
-            if((*it).getId() == id){
-                return &(*it);
-            }
-            it++;
-        }
-        return NULL;
+        if (!isEmployeeExists(id)) {
+            throw EmployeeIsNotHired();
+    }
+        return (*employees.find(id)).second;
     }
 
-    std::set<Employee> Manager::getEmployeeSet() const
+    std::map<long, Employee *> Manager::getEmployeeSet() const
     {
         return this->employees;
     }
