@@ -14,6 +14,7 @@ namespace mtm{
         int year_of_birth;
     public:
         Citizen(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
+        virtual ~Citizen() = default;
         long getId() const;
         const std::string &getFirstName() const;
         const std::string &getLastName() const;

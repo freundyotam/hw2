@@ -10,7 +10,7 @@ namespace mtm{
         int required_skill_points;
     public:
         Skill(long id, const std::string &name, int requiredSkillPoints);
-
+        ~Skill() = default;
         long getId() const;
         const std::string &getName() const;
         int getRequiredSkillPoints() const;
@@ -24,7 +24,9 @@ namespace mtm{
         Skill& operator+=(int rhs);
         Skill operator+(int point);
         friend std::ostream& operator<<(std::ostream& os, const Skill& skill);
+        friend Skill operator+(int i, Skill& skill);
     };
+
 }
 
 #endif //UNTITLED_SKILL_H

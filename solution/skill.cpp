@@ -37,7 +37,7 @@ namespace mtm{
 
     bool Skill::operator<(const Skill &rhs) const
     {
-        return rhs.getId() < id;
+        return id < rhs.getId();
     }
 
     bool Skill::operator>(const Skill &rhs) const
@@ -85,4 +85,12 @@ namespace mtm{
         return os << skill.getName() << std::endl;
     }
 
+     Skill operator+(int i, Skill& skill)
+    {
+        if (i < 0){
+            throw NegativePoints();
+        }
+        skill.required_skill_points += i;
+        return skill;
+    }
 }

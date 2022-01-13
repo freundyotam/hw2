@@ -20,7 +20,11 @@ namespace mtm{
 
     void Manager::setSalary(long salary)
     {
-        Manager::salary += salary;
+        if(this->salary + salary < 0){
+            this->salary = 0;
+            return;
+        }
+        this->salary += salary;
     }
     void Manager::printShort(std::ostream& ostream) const
     {
@@ -39,6 +43,7 @@ namespace mtm{
     Manager *Manager::clone()
     {
         Manager* copy = new Manager(getId(), getFirstName(), getLastName(), getBirthYear());
+        copy->setSalary(this->getSalary());
         map<long, Employee *> copy_employees;
         for (const std::pair<long, Employee *> pair : this->employees)
         {

@@ -27,7 +27,7 @@ void test_workplace(){
     // Check hire manager with employees
     Skill s(2,"skill", 0);
     Employee e1(3, "first", "employee", 112);
-    e1.learnSkill(&s);
+    e1.learnSkill(s);
     Manager m1(4, "first", "manager", 9999);
     m1.addEmployee(&e1);
 

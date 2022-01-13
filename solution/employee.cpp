@@ -27,11 +27,19 @@ namespace mtm{
 
     void Employee::setSalary(long add_salary)
     {
-        Employee::salary += add_salary;
+        if(this->salary + add_salary < 0){
+            this->salary = 0;
+            return;
+        }
+        this->salary += add_salary;
     }
 
     void Employee::setScore(int score)
     {
+        if(this->getScore() + score < 0){
+            this->rank = 0;
+            return;
+        }
         Employee::rank += score;
     }
     void Employee::printShort(ostream& stream) const
@@ -44,23 +52,23 @@ namespace mtm{
         stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
         << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
 
-        for (const std::pair<long, const Skill *> pair : this->skills)
+        for (const std::pair<long, const Skill> pair : this->skills)
         {
-            stream << pair.second->getName() << endl;
+            stream << pair.second.getName() << endl;
         }
     }
 
-    void Employee::learnSkill(const Skill* skill)
+    void Employee::learnSkill(const Skill skill)
     {
 
-        if(this->hasSkill(skill->getId())){
+        if(this->hasSkill(skill.getId())){
             throw SkillAlreadyLearned();
         }
-        else if(this->getScore() < skill->getRequiredSkillPoints())
+        else if(this->getScore() < skill.getRequiredSkillPoints())
         {
             throw CanNotLearnSkill();
         }
-        skills.insert({skill->getId(), skill});
+        skills.insert({skill.getId(), skill});
     }
 
     bool Employee::hasSkill(long skill_id)
@@ -82,11 +90,12 @@ namespace mtm{
     Employee *Employee::clone()
     {
         Employee* copy = new Employee(getId(), getFirstName(), getLastName(),getBirthYear());
-        map<long, const Skill *> copy_skills;
-        for (const std::pair<long, const Skill *> pair : this->skills)
+        copy->setScore(this->getScore());
+        copy->salary = this->salary;
+        map<long, const Skill> copy_skills;
+        for (const std::pair<long, Skill> pair : this->skills)
         {
-            const Skill* ptr = pair.second;
-            copy_skills.insert({pair.first, ptr});
+            copy_skills.insert({pair.first, pair.second});
         }
 
         copy->skills = copy_skills;
