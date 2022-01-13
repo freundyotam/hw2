@@ -7,14 +7,14 @@ mtm::City::City(std::string name) : name(name)
 void mtm::City::addEmployee(long id, std::string name, std::string lastName, int yearOfBirth)
 {
     Employee employee(id, name, lastName, yearOfBirth);
-    if (!employees.insert({id, employee}).second)
+    if (managers.count(id) > 0 || !employees.insert({id, employee}).second)
         throw CitizenAlreadyExists();
 }
 
 void mtm::City::addManager(long id, std::string name, std::string lastName, int yearOfBirth)
 {
     Manager manager(id, name, lastName, yearOfBirth);
-    if (!managers.insert({id, manager}).second)
+    if (employees.count(id) > 0 || !managers.insert({id, manager}).second)
         throw CitizenAlreadyExists();
 }
 
@@ -81,7 +81,7 @@ int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
     {
         if ((*it_employee).first < (*it_manager).first)
         {
-            if ((*it_employee).second.getSalary() > salary)
+            if ((*it_employee).second.getSalary() >= salary)
             {
                 (*it_employee).second.printShort(os);
                 counter++;
@@ -90,7 +90,7 @@ int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
         }
         else
         {
-            if ((*it_manager).second.getSalary() > salary)
+            if ((*it_manager).second.getSalary() >= salary)
             {
                 (*it_manager).second.printShort(os);
                 counter++;
@@ -101,7 +101,7 @@ int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 
     while (it_manager != managers.end())
     {
-        if ((*it_manager).second.getSalary() > salary)
+        if ((*it_manager).second.getSalary() >= salary)
         {
             (*it_manager).second.printShort(os);
             counter++;
@@ -111,7 +111,7 @@ int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 
     while (it_employee != employees.end())
     {
-        if ((*it_employee).second.getSalary() > salary)
+        if ((*it_employee).second.getSalary() >= salary)
         {
             (*it_employee).second.printShort(os);
             counter++;
@@ -124,6 +124,8 @@ int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)
 {
+    getEmployeeById(employeeOneId);
+    getEmployeeById(employeeTwoId);
     for (std::pair<long, Workplace> id_workplace_pair : workplaces)
     {
         Workplace &workplace = id_workplace_pair.second;
