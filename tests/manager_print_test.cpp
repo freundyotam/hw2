@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Employee.h"
-#include "Manager.h"
+#include "../solution/employee.h"
+#include "../solution/manager.h"
 
 using namespace mtm;
 using std::cout;

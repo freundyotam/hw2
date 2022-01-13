@@ -1,5 +1,5 @@
-#include "Skill.h"
-#include "Employee.h"
+#include "../solution/skill.h"
+#include "../solution/employee.h"
 using namespace mtm;
 using std::cout;
 using std::endl;
