@@ -8,5 +8,6 @@
 void check_manager_salary();
 void check_add_employees_to_manager();
 void check_manager_printing();
+void test_manager();
 
 #endif //UNTITLED_MANAGER_TEST_H

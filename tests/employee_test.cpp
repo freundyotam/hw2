@@ -38,8 +38,8 @@ void check_employees_skill_functionality()
     Employee e1(1, "first", "last", 1880);
     Skill s(0, "hiking", 0);
     // Check learn skill twice
-    e1.learnSkill(s);
-    ASSERT_EXCEPTION(e1.learnSkill(s), SkillAlreadyLearned);
+    e1.learnSkill(&s);
+    ASSERT_EXCEPTION(e1.learnSkill(&s), SkillAlreadyLearned);
 
     //Check has skill
     assert(e1.hasSkill(0));
@@ -52,14 +52,14 @@ void check_employees_skill_functionality()
 
     // Check not enough points
     Skill s2(1, "hiking", 6);
-    ASSERT_EXCEPTION(e1.learnSkill(s2), CanNotLearnSkill);
+    ASSERT_EXCEPTION(e1.learnSkill(&s2), CanNotLearnSkill);
 
     // Check get score
     e1.setScore(6);
     assert(e1.getScore() == 6);
 
     // Check learn skill with enough points
-    e1.learnSkill(s2);
+    e1.learnSkill(&s2);
     assert(e1.getScore() == 6);
 
     // Check set salary
@@ -77,14 +77,17 @@ void check_employee_printing(){
 
     // Check print long
     std::ostringstream out2;
-    e1.learnSkill(Skill(12,"m", 0));
+    Skill s3 = Skill(12,"m", 0);
+    e1.learnSkill(&s3);
     e1.printLong(out2);
     assert("first last\nid - 1 birth_year - 1880\nSalary: 9 Score: 5 Skills:\nm\n" == out2.str());
 }
 void test_employee_clone(){
     Employee e1(1, "first", "last", 1880);
-    e1.learnSkill(Skill(1, "hiking", 0));
-    e1.learnSkill(Skill(2, "biking", 0));
+    Skill s1(1, "hiking", 0);
+    Skill s2(2, "biking", 0);
+    e1.learnSkill(&s1);
+    e1.learnSkill(&s2);
     Employee* e2 = e1.clone();
     // Check members
     assert(e1.getId() == e2->getId());
@@ -99,7 +102,8 @@ void test_employee_clone(){
     assert(e2->hasSkill(2));
 
     // Check Skills not pointing the same thing
-    e2->learnSkill(Skill(3, "9GAG", 0));
+    Skill s3(3, "9GAG", 0);
+    e2->learnSkill(&s3);
     assert(!e1.hasSkill(3));
     e1.forgetSkill(1);
     assert(e2->hasSkill(1));

@@ -17,10 +17,8 @@ int main(int argc, char** argv)
     check_employees_skill_functionality();
     check_employee_printing();
     test_employee_clone();
-    check_manager_salary();
-    check_add_employees_to_manager();
-    check_manager_printing();
     manager_print_test();
     workplace_test();
+    test_manager();
 }
 

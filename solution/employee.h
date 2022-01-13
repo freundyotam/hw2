@@ -5,7 +5,7 @@
 #ifndef UNTITLED_EMPLOYEE_H
 #define UNTITLED_EMPLOYEE_H
 
-#include <set>
+#include <map>
 #include "citizen.h"
 #include "skill.h"
 namespace mtm{
@@ -17,7 +17,7 @@ namespace mtm{
         void setSalary(long salary);
         void setScore(int score);
         int getScore() const;
-        void learnSkill(const Skill& skill);
+        void learnSkill(const Skill* skill);
         void forgetSkill(long skill_id);
         bool hasSkill(long skill_id);
         void printShort(std::ostream&) const override;
@@ -25,7 +25,7 @@ namespace mtm{
         Employee* clone() override;
         Employee(long id, const std::string &name, const std::string &lastName, int yearOfBirth);
     private:
-        std::set<Skill> skills;
+        std::map<long, const Skill*> skills;
     public:
 
     };

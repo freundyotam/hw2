@@ -13,8 +13,8 @@ int main_employee_print_test(){
     cout << "----------" << endl;
     Skill s1(1,"C++",0);
     Skill s2(2, "Java", 0);
-    e1.learnSkill(s1);
-    e1.learnSkill(s2);
+    e1.learnSkill(&s1);
+    e1.learnSkill(&s2);
     cout << "Short Print" << endl;
     e1.printShort(cout);
     cout << "Long Print" << endl;

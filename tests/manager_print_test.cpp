@@ -11,9 +11,9 @@ int manager_print_test() {
     Skill s1(1,"C++",0);
     Skill s2(2, "Java", 0);
     Employee e2(2, "Alex", "Martinez", 2000);
-    e1.learnSkill(s1);
-    e1.learnSkill(s2);
-    e2.learnSkill(s2);
+    e1.learnSkill(&s1);
+    e1.learnSkill(&s2);
+    e2.learnSkill(&s2);
     Manager m1(1,"Robert", "stark", 1980);
     cout << "Short Print" << endl;
     m1.printShort(cout);

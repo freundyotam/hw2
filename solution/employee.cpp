@@ -4,7 +4,8 @@
 
 #include "employee.h"
 #include "exceptions.h"
-#include <set>
+#include <map>
+
 using namespace std;
 
 namespace mtm{
@@ -42,36 +43,29 @@ namespace mtm{
     {
         stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
         << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
-        set<Skill>::iterator it = skills.begin();
-        while (it != skills.end())
+
+        for (const std::pair<long, const Skill *> pair : this->skills)
         {
-            stream << (*it).getName() << endl;
-            it++;
+            stream << pair.second->getName() << endl;
         }
     }
 
-    void Employee::learnSkill(const Skill& skill)
+    void Employee::learnSkill(const Skill* skill)
     {
-        if(this->hasSkill(skill.getId())){
+
+        if(this->hasSkill(skill->getId())){
             throw SkillAlreadyLearned();
         }
-        else if(this->getScore() < skill.getRequiredSkillPoints())
+        else if(this->getScore() < skill->getRequiredSkillPoints())
         {
             throw CanNotLearnSkill();
         }
-        skills.insert(skill);
+        skills.insert({skill->getId(), skill});
     }
 
     bool Employee::hasSkill(long skill_id)
     {
-        set<Skill>::iterator it = skills.begin();
-        while (it != skills.end())
-        {
-            if((*it).getId() == skill_id)
-                return true;
-            it++;
-        }
-        return false;
+        return skills.count(skill_id) > 0;
     }
 
     void Employee::forgetSkill(long skill_id)
@@ -81,9 +75,9 @@ namespace mtm{
         }
         else
         {
-            skills.erase(Skill(skill_id,"",0));
+            skills.erase(skill_id);
         }
-    } // todo Is this the right way to erase?
+    }
 
     Employee *Employee::clone()
     {
