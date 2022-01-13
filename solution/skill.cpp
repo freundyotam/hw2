@@ -37,7 +37,7 @@ namespace mtm{
 
     bool Skill::operator<(const Skill &rhs) const
     {
-        return rhs.getId() < id;
+        return id < rhs.getId();
     }
 
     bool Skill::operator>(const Skill &rhs) const

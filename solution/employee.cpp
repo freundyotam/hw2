@@ -27,11 +27,19 @@ namespace mtm{
 
     void Employee::setSalary(long add_salary)
     {
-        Employee::salary += add_salary;
+        if(this->salary + add_salary < 0){
+            this->salary = 0;
+            return;
+        }
+        this->salary += add_salary;
     }
 
     void Employee::setScore(int score)
     {
+        if(this->getScore() + score < 0){
+            this->rank = 0;
+            return;
+        }
         Employee::rank += score;
     }
     void Employee::printShort(ostream& stream) const
@@ -82,6 +90,8 @@ namespace mtm{
     Employee *Employee::clone()
     {
         Employee* copy = new Employee(getId(), getFirstName(), getLastName(),getBirthYear());
+        copy->setScore(this->getScore());
+        copy->salary = this->salary;
         map<long, const Skill> copy_skills;
         for (const std::pair<long, Skill> pair : this->skills)
         {
