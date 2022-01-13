@@ -30,7 +30,7 @@ void check_manager_clone()
     Manager m1(2, "a", "b", 10);
     Employee e1(3, "e", "1", 1111);
     Skill s1(1, "name1", 0);
-    e1.learnSkill(s1);
+    e1.learnSkill(&s1);
     m1.addEmployee(&e1);
 
     Manager *m2 = m1.clone();

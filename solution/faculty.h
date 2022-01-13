@@ -68,7 +68,7 @@ namespace mtm
         if (employee->hasSkill(skill.getId()))
             return;
 
-        employee->learnSkill(skill);
+        employee->learnSkill(&skill);
         employee->setScore(this->added_points);
     }
 }

@@ -9,7 +9,7 @@ public:
         return emp->getId()>0;
     }
 };
-int main() {
+int workplace_test() {
     Workplace Meta(1,"Meta", 10000, 20000);
     Employee* e1 = new Employee(1, "John", "Williams", 2002);
     Employee* e2 = new Employee(2, "Alex", "Martinez", 2000);
