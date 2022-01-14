@@ -64,7 +64,7 @@ namespace mtm{
         if(this->hasSkill(skill.getId())){
             throw SkillAlreadyLearned();
         }
-        else if(this->getScore() < skill.getRequiredSkillPoints())
+        else if (this->getScore() < skill.getRequiredPoints())
         {
             throw CanNotLearnSkill();
         }

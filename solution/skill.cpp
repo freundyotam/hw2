@@ -20,7 +20,7 @@ namespace mtm{
         return name;
     }
 
-    int Skill::getRequiredSkillPoints() const
+    int Skill::getRequiredPoints() const
     {
         return required_skill_points;
     }
