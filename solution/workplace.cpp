@@ -66,6 +66,11 @@ void mtm::Workplace::hireManager(Manager *manager)
     managers.insert({manager->getId(), manager});
 
     manager->setSalary(this->manager_salary);
+
+    for (auto employee_pair : manager->getEmployeeSet())
+    {
+        employee_pair.second->setSalary(this->worker_salary);
+    }
 }
 
 void mtm::Workplace::fireManager(long managerId)
@@ -95,6 +100,7 @@ std::ostream &mtm::operator<<(std::ostream &os, const Workplace &workplace)
 
     for (const std::pair<long, Manager *> &manager_pair : workplace.managers)
     {
+        os << "Manager ";
         manager_pair.second->printLong(os);
     }
 
