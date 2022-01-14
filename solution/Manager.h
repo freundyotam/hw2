@@ -6,8 +6,8 @@
 #ifndef UNTITLED_MANAGER_H
 #define UNTITLED_MANAGER_H
 
-#include "citizen.h"
-#include "employee.h"
+#include "Citizen.h"
+#include "Employee.h"
 #include <map>
 namespace mtm{
     class Manager : public Citizen{

@@ -4,11 +4,11 @@
 #include <string>
 #include <set>
 
-#include "citizen.h"
-#include "faculty.h"
-#include "workplace.h"
+#include "Citizen.h"
+#include "Faculty.h"
+#include "Workplace.h"
 #include "exceptions.h"
-#include "skill.h"
+#include "Skill.h"
 
 namespace mtm
 {

@@ -6,8 +6,8 @@
 #define UNTITLED_EMPLOYEE_H
 
 #include <map>
-#include "citizen.h"
-#include "skill.h"
+#include "Citizen.h"
+#include "Skill.h"
 namespace mtm{
     class Employee : public mtm::Citizen{
         long salary;

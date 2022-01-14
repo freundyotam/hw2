@@ -2,8 +2,8 @@
 #define FACULTY_H
 
 #include "exceptions.h"
-#include "skill.h"
-#include "employee.h"
+#include "Skill.h"
+#include "Employee.h"
 #include <string>
 
 namespace mtm

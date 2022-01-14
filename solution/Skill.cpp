@@ -1,4 +1,4 @@
-#include "skill.h"
+#include "Skill.h"
 #include "exceptions.h"
 
 #include <iostream>

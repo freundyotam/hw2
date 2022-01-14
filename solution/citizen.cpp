@@ -2,9 +2,10 @@
 // Created by yotam freund on 30/12/2021.
 //
 
-#include "citizen.h"
+#include "Citizen.h"
 #include <ostream>
-namespace mtm{
+namespace mtm
+{
     long Citizen::getId() const
     {
         return id;
@@ -26,10 +27,11 @@ namespace mtm{
     }
 
     Citizen::Citizen(long id, const std::string &name, const std::string &lastName, int yearOfBirth) : id(id), name(name),
-                                                                                                            last_name(lastName),
-                                                                                                            year_of_birth(
-                                                                                                                    yearOfBirth)
-    {}
+                                                                                                       last_name(lastName),
+                                                                                                       year_of_birth(
+                                                                                                           yearOfBirth)
+    {
+    }
 
     bool Citizen::operator==(const Citizen &rhs) const
     {
