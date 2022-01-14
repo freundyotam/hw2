@@ -5,8 +5,8 @@
 #include <map>
 
 #include "exceptions.h"
-#include "employee.h"
-#include "manager.h"
+#include "Employee.h"
+#include "Manager.h"
 
 namespace mtm
 {

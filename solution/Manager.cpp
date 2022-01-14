@@ -4,7 +4,7 @@
 
 #include <map>
 #include "exceptions.h"
-#include "manager.h"
+#include "Manager.h"
 using namespace std;
 
 namespace mtm{

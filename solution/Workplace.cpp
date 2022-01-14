@@ -1,4 +1,4 @@
-#include "workplace.h"
+#include "Workplace.h"
 #include "exceptions.h"
 
 #include <ostream>
