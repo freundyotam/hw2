@@ -50,11 +50,7 @@ namespace mtm{
     {
         Manager* copy = new Manager(getId(), getFirstName(), getLastName(), getBirthYear());
         copy->setSalary(this->getSalary());
-        map<long, Employee *> copy_employees;
-        for (const std::pair<long, Employee *> pair : this->employees)
-        {
-            copy_employees.insert({pair.first, pair.second->clone()});
-        }
+        map<long, Employee *> copy_employees = map<long, Employee *>(this->employees);
         copy->employees = copy_employees;
         return copy;
     }
