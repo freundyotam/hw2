@@ -40,15 +40,14 @@ void check_skill_logic_operators()
     assert(s2 == s2);
     assert(s1 <= s2);
     assert(s1 >= s2);
-    assert((s1++).getRequiredSkillPoints() == 102);
-    assert(s1.getRequiredSkillPoints() == 103);
+    assert((s1++).getRequiredPoints() == 102);
+    assert(s1.getRequiredPoints() == 103);
     assert(!(s1 > s2));
     assert(!(s2 < s1));
     s1+=3;
-    assert(s1.getRequiredSkillPoints() == 106);
+    assert(s1.getRequiredPoints() == 106);
     s1 = s2 + 3;
-    assert(s1.getRequiredSkillPoints() == 106);
-
+    assert(s1.getRequiredPoints() == 106);
 }
 
 void check_skill_members()
@@ -59,5 +58,5 @@ void check_skill_members()
     Skill s1(id1, name1, points1);
     assert(s1.getId() == id1);
     assert(s1.getName() == name1);
-    assert(s1.getRequiredSkillPoints() == points1);
+    assert(s1.getRequiredPoints() == points1);
 }

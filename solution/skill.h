@@ -13,7 +13,7 @@ namespace mtm{
         ~Skill() = default;
         long getId() const;
         const std::string &getName() const;
-        int getRequiredSkillPoints() const;
+        int getRequiredPoints() const;
         bool operator==(const Skill &rhs) const;
         bool operator!=(const Skill &rhs) const;
         bool operator<(const Skill &rhs) const;

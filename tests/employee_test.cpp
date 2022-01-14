@@ -80,7 +80,7 @@ void check_employee_printing(){
     Skill s3 = Skill(12,"m", 0);
     e1.learnSkill(s3);
     e1.printLong(out2);
-    assert("first last\nid - 1 birth_year - 1880\nSalary: 9 Score: 5 Skills:\nm\n" == out2.str());
+    assert("first last\nid - 1 birth_year - 1880\nSalary: 9 Score: 5 Skills: \nm\n" == out2.str());
 }
 void test_employee_clone(){
     Employee e1(1, "first", "last", 1880);

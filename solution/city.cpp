@@ -73,53 +73,28 @@ void mtm::City::fireManagerAtWorkplace(long managerId, long workplaceId)
 
 int mtm::City::getAllAboveSalary(std::ostream &os, long salary)
 {
-    int counter = 0;
-    std::map<long, Manager>::iterator it_manager = managers.begin();
-    std::map<long, Employee>::iterator it_employee = employees.begin();
-
-    while (it_manager != managers.end() && it_employee != employees.end())
+    std::map<long, bool> citizen_map; // map of id, is_manager pairs.
+    for (auto manager_pair : managers)
     {
-        if ((*it_employee).first < (*it_manager).first)
-        {
-            if ((*it_employee).second.getSalary() >= salary)
-            {
-                (*it_employee).second.printShort(os);
-                counter++;
-            }
-            ++it_employee;
-        }
+        if (manager_pair.second.getSalary() >= salary)
+            citizen_map.insert({manager_pair.first, true});
+    }
+
+    for (auto employee_pair : employees)
+    {
+        if (employee_pair.second.getSalary() >= salary)
+            citizen_map.insert({employee_pair.first, false});
+    }
+
+    for (auto citizen_pair : citizen_map)
+    {
+        if (citizen_pair.second) // if is_manager, find him in managers, else in employees.
+            (*managers.find(citizen_pair.first)).second.printShort(os);
         else
-        {
-            if ((*it_manager).second.getSalary() >= salary)
-            {
-                (*it_manager).second.printShort(os);
-                counter++;
-            }
-            ++it_manager;
-        }
+            (*employees.find(citizen_pair.first)).second.printShort(os);
     }
 
-    while (it_manager != managers.end())
-    {
-        if ((*it_manager).second.getSalary() >= salary)
-        {
-            (*it_manager).second.printShort(os);
-            counter++;
-        }
-        ++it_manager;
-    }
-
-    while (it_employee != employees.end())
-    {
-        if ((*it_employee).second.getSalary() >= salary)
-        {
-            (*it_employee).second.printShort(os);
-            counter++;
-        }
-        ++it_employee;
-    }
-
-    return counter;
+    return citizen_map.size();
 }
 
 bool mtm::City::isWorkingInTheSameWorkplace(long employeeOneId, long employeeTwoId)

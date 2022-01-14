@@ -49,8 +49,15 @@ namespace mtm{
     }
     void Employee::printLong(ostream& stream) const
     {
-        stream << getFirstName() << " " << getLastName() << endl << "id - " << getId() << " birth_year - " << getBirthYear()
-        << endl << "Salary: " << getSalary() << " Score: " << getScore() << " Skills:" << endl;
+        stream << getFirstName() << " " << getLastName() << endl
+               << "id - " << getId() << " birth_year - " << getBirthYear()
+               << endl
+               << "Salary: " << getSalary() << " Score: " << getScore();
+
+        if (skills.size() > 0)
+            stream << " Skills: ";
+
+        stream << endl;
 
         for (const std::pair<long, const Skill> pair : this->skills)
         {
@@ -64,7 +71,7 @@ namespace mtm{
         if(this->hasSkill(skill.getId())){
             throw SkillAlreadyLearned();
         }
-        else if(this->getScore() < skill.getRequiredSkillPoints())
+        else if (this->getScore() < skill.getRequiredPoints())
         {
             throw CanNotLearnSkill();
         }

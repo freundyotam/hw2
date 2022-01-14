@@ -48,7 +48,7 @@ void check_manager_clone()
     // Test deleting skill
     e1.forgetSkill(1);
     assert(!e1.hasSkill(1));
-    assert(e2->hasSkill(1));
+    assert(!e2->hasSkill(1));
 
     // Test deleting employee
     m1.removeEmployee(3);
@@ -69,7 +69,7 @@ void check_manager_printing()
     //Check long print
     std::ostringstream out2;
     m1.printLong(out2);
-    assert("a b\nid - 2 birth_year - 10\nSalary: 3\nEmployees:\ne 1\nSalary: 0 Score: 0\n" == out2.str());
+    assert("a b\nid - 2 birth_year - 10\nSalary: 3\nEmployees: \ne 1\nSalary: 0 Score: 0\n" == out2.str());
 }
 
 void check_add_employees_to_manager()
