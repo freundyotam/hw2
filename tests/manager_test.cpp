@@ -48,7 +48,7 @@ void check_manager_clone()
     // Test deleting skill
     e1.forgetSkill(1);
     assert(!e1.hasSkill(1));
-    assert(e2->hasSkill(1));
+    assert(!e2->hasSkill(1));
 
     // Test deleting employee
     m1.removeEmployee(3);
